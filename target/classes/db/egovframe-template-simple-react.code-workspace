@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../egovframe-template-simple-backend"
+		},
+		{
+			"path": "../../../../../egovframe-template-simple-react"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}
