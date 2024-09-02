@@ -52,6 +52,12 @@
 	</parent>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<!-- spring boot dependency start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -242,6 +248,14 @@
 			<version>2.7.2</version>
 			<classifier>jdk8</classifier>
 		</dependency>
+
+		<!-- postgresql driver -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.5.0</version>
+		</dependency>
+
 
 		<!-- mysql driver -->
 

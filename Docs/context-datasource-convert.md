@@ -6,7 +6,7 @@
 
 내장 DB 사용시
 
-<context-datasource.xml>
+<context-datasource.xml>d
 
 ```xml
 <jdbc:embedded-database id="dataSource-hsql" type="HSQL">

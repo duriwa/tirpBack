@@ -1,0 +1,37 @@
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-5] [FilterChainProxy:218] - Securing OPTIONS /jwtAuthAPI
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-5] [SecurityContextPersistenceFilter:104] - Set SecurityContextHolder to empty SecurityContext
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-5] [SecurityContextPersistenceFilter:120] - Cleared SecurityContextHolder to complete request
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [FilterChainProxy:218] - Securing POST /jwtAuthAPI
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [SecurityContextPersistenceFilter:104] - Set SecurityContextHolder to empty SecurityContext
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [EgovJwtTokenUtil:51] - ===>>> secret = egovframe
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [JwtAuthenticationFilter:64] - Unable to verify JWT Token: JWT expired at 2024-08-14T11:16:08Z. Current time: 2024-08-16T12:45:55Z, a difference of 178187872 milliseconds.  Allowed clock skew: 0 milliseconds.
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [AnonymousAuthenticationFilter:100] - Set SecurityContextHolder to anonymous SecurityContext
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [SessionManagementFilter:116] - Request requested invalid session id 7318DC9B1EF668457B09D9DDA3AFEA06
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:455] - No properties file found for [classpath:/egovframework/message/com/message-common_ko_KR] - neither plain properties nor XML
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:425] - Re-caching properties for filename [classpath:/egovframework/message/com/message-common_ko] - file hasn't been modified
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:425] - Re-caching properties for filename [classpath:/egovframework/message/com/message-common] - file hasn't been modified
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:455] - No properties file found for [classpath:/org/egovframe/rte/fdl/idgnr/messages/idgnr_ko_KR] - neither plain properties nor XML
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:425] - Re-caching properties for filename [classpath:/org/egovframe/rte/fdl/idgnr/messages/idgnr_ko] - file hasn't been modified
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:425] - Re-caching properties for filename [classpath:/org/egovframe/rte/fdl/idgnr/messages/idgnr] - file hasn't been modified
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:455] - No properties file found for [classpath:/org/egovframe/rte/fdl/property/messages/properties_ko_KR] - neither plain properties nor XML
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:425] - Re-caching properties for filename [classpath:/org/egovframe/rte/fdl/property/messages/properties_ko] - file hasn't been modified
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [ReloadableResourceBundleMessageSource:425] - Re-caching properties for filename [classpath:/org/egovframe/rte/fdl/property/messages/properties] - file hasn't been modified
+DEBUG 24-08-16 12:45:55[http-nio-8080-exec-4] [SecurityContextPersistenceFilter:120] - Cleared SecurityContextHolder to complete request
+DEBUG 24-08-16 12:45:57[http-nio-8080-exec-1] [FilterChainProxy:218] - Securing GET /assets/images/logo_tr_m.png
+DEBUG 24-08-16 12:45:57[http-nio-8080-exec-1] [SecurityContextPersistenceFilter:104] - Set SecurityContextHolder to empty SecurityContext
+DEBUG 24-08-16 12:45:57[http-nio-8080-exec-1] [EgovJwtTokenUtil:51] - ===>>> secret = egovframe
+DEBUG 24-08-16 12:45:57[http-nio-8080-exec-1] [JwtAuthenticationFilter:64] - Unable to verify JWT Token: JWT String argument cannot be null or empty.
+DEBUG 24-08-16 12:45:57[http-nio-8080-exec-1] [AnonymousAuthenticationFilter:100] - Set SecurityContextHolder to anonymous SecurityContext
+DEBUG 24-08-16 12:45:57[http-nio-8080-exec-1] [SessionManagementFilter:116] - Request requested invalid session id 7318DC9B1EF668457B09D9DDA3AFEA06
+DEBUG 24-08-16 12:45:57[http-nio-8080-exec-1] [SecurityContextPersistenceFilter:120] - Cleared SecurityContextHolder to complete request
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [ApplicationAvailabilityBean:77] - Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [AnnotationConfigServletWebServerApplicationContext:1051] - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@604055c1, started on Fri Aug 09 12:47:19 KST 2024
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [DefaultLifecycleProcessor:365] - Stopping beans in phase 2147483647
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [DefaultLifecycleProcessor:238] - Bean 'webServerGracefulShutdown' completed its stop procedure
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [DefaultLifecycleProcessor:365] - Stopping beans in phase 2147483646
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [DefaultLifecycleProcessor:238] - Bean 'webServerStartStop' completed its stop procedure
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [DefaultLifecycleProcessor:365] - Stopping beans in phase -2147483647
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [DefaultLifecycleProcessor:238] - Bean 'springBootLoggingLifecycle' completed its stop procedure
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [ThreadPoolTaskExecutor:218] - Shutting down ExecutorService 'applicationTaskExecutor'
+INFO  24-08-16 16:32:49[SpringApplicationShutdownHook] [EmbeddedDatabaseFactory:221] - Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+DEBUG 24-08-16 16:32:49[SpringApplicationShutdownHook] [SimpleDriverDataSource:142] - Creating new JDBC Driver Connection to [jdbc:hsqldb:mem:testdb]
