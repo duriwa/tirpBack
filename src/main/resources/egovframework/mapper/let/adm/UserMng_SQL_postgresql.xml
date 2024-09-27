@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMngDAO">
+
+
+	<resultMap id="userMngList" type="egovframework.let.cop.adm.service.UserMngVO">
+		<result property="userId" column="user_id"/>
+		<result property="userNm" column="user_nm"/>
+		<result property="userPw" column="user_pw"/>
+		<result property="frstRegDt" column="frst_reg_dt"/>
+		<result property="frstRegId" column="frst_reg_id"/>
+		<result property="lastProcDt" column="last_proc_dt"/>
+		<result property="lastProcId" column="last_proc_id"/>
+		<result property="userSeq" column="user_seq"/>
+		<result property="useAt" column="use_at"/>
+		<result property="rownum" column="rownum"/>
+	</resultMap>
+
+	<resultMap id="userMngDetail" type="egovframework.let.cop.adm.service.UserMngVO">
+		<result property="userId" column="user_id"/>
+		<result property="userNm" column="user_nm"/>
+		<result property="userPw" column="user_pw"/>
+		<result property="frstRegDt" column="frst_reg_dt"/>
+		<result property="frstRegId" column="frst_reg_id"/>
+		<result property="lastProcDt" column="last_proc_dt"/>
+		<result property="lastProcId" column="last_proc_id"/>
+		<result property="userSeq" column="user_seq"/>
+		<result property="useAt" column="use_at"/>
+	</resultMap>
+
+	<resultMap id="userMngAll" type="egovframework.let.cop.adm.service.UserMngVO">
+		<result property="bbsId" column="BBS_ID"/>
+		<result property="bbsTyCode" column="BBS_TY_CODE"/>
+		<result property="bbsAttrbCode" column="BBS_ATTRB_CODE"/>
+		<result property="bbsNm" column="BBS_NM"/>
+		<result property="tmplatId" column="TMPLAT_ID"/>
+	</resultMap>
+
+	<insert id="insertUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng">
+		
+			INSERT INTO tb_cm_user
+			(user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id
+			, user_seq, use_at)
+			VALUES
+			( #{userId}, #{userNm}, #{userPw}, CURRENT_TIMESTAMP, #{frstRegId}, CURRENT_TIMESTAMP, #{lastProcId}
+			, #{userSeq}, #{useAt}  
+			 )			
+		
+	</insert>
+	
+	<select id="selectUserMngInfs" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultMap="userMngList">
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id, user_seq,
+				row_number() over () AS rownum
+			FROM
+				tb_cm_user a
+			WHERE 1=1	
+
+			<if test="useAt != null and useAt != ''">
+				AND a.USE_AT = #{useAt}
+			</if>
+			<if test="searchCnd == 0">AND
+					a.user_nm LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					b.user_id LIKE '%' || #{searchWrd} || '%'		
+			</if>	
+	
+			ORDER BY a.frst_reg_dt DESC 
+			) TB )
+
+			WHERE rn BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
+
+	</select>	
+	
+	<select id="selectUserMngInfsCnt" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultType="java.lang.Integer">
+		
+			SELECT 
+				COUNT(a.user_id)
+			FROM
+				tb_cm_user a
+			WHERE 1=1 
+
+			<if test="useAt != null and useAt != ''">
+				AND a.USE_AT = #{useAt}
+			</if>
+			<if test="searchCnd == 0">AND
+					a.user_nm LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					b.CODE_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>	
+
+	</select>	
+ 
+	<select id="selectUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng" resultMap="userMngDetail">
+		
+			SELECT 
+				a.user_id, a.user_nm, a.user_pw, a.frst_reg_dt, a.frst_reg_id, a.last_proc_dt, a.last_proc_id, a.user_seq				
+			FROM
+				tb_cm_user a
+			WHERE a.user_id = #{userId}
+						
+	</select> 
+ 
+ 	<update id="updateUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng">
+ 		
+			UPDATE tb_cm_user SET 
+				user_nm = #{userNm},
+				user_pw = #{userPw}, 
+				last_proc_id = #{lastProcId},
+				last_proc_dt = CURRENT_TIMESTAMP
+			WHERE user_id = #{userId}
+ 	</update>
+
+ 	<update id="deleteUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng">
+ 		
+			UPDATE tb_cm_user SET 
+				USE_AT = 'N',
+				last_proc_id = #{lastProcId},
+				last_proc_dt = CURRENT_TIMESTAMP
+			WHERE user_id = #{userId}
+	
+ 	</update>
+
+	<select id="selectAllUserMng" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultMap="userMngAll">
+		
+			SELECT 
+				user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id, user_seq
+			FROM
+				tb_cm_user 
+			WHERE USE_AT = 'Y'			
+ 						
+	</select>
+	
+	<select id="selectAllBdMstrByTrget" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultMap="userMngAll">
+		
+			SELECT 
+				a.BBS_ID, a.BBS_TY_CODE, a.BBS_ATTRB_CODE, a.BBS_NM, a.TMPLAT_ID
+			FROM
+				LETTNBBSMASTER a, LETTNBBSUSE b
+			WHERE 
+				a.BBS_ID = b.BBS_ID
+			AND
+				b.TRGET_ID = #{trgetId}
+			AND
+				 a.USE_AT = 'Y'	 AND b.USE_AT = 'Y'		
+			 ORDER BY a.BBS_ID  
+ 						
+	</select>	
+
+	<select id="selectBdMstrListByTrget" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultMap="userMngList">
+		
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				a.BBS_ID, a.BBS_TY_CODE, b.CODE_NM as BBS_TY_CODE_NM,
+				a.BBS_ATTRB_CODE, c.CODE_NM as BBS_ATTRB_CODE_NM, a.BBS_NM, 
+				a.TMPLAT_ID, a.USE_AT, 
+				TO_CHAR(a.FRST_REGIST_PNTTM, 'YYYY-MM-DD') as FRST_REGIST_PNTTM
+				, row_number() over (ORDER BY a.FRST_REGIST_PNTTM DESC) AS rownum
+			FROM
+				LETTNBBSMASTER a
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM004' AND USE_AT='Y') b
+				ON a.BBS_TY_CODE = b.CODE
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM009' AND USE_AT='Y') c
+				ON a.BBS_ATTRB_CODE = c.CODE,
+			LETTNBBSUSE d
+			WHERE 
+				a.BBS_ID = d.BBS_ID
+			AND
+				d.TRGET_ID = #{trgetId}
+		
+			<if test="searchCnd == 0">AND
+					a.BBS_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					b.CODE_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>	
+					
+			ORDER BY a.FRST_REGIST_PNTTM DESC 
+			) TB ) WHERE rn BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
+					
+	</select>
+
+	<select id="selectBdMstrListCntByTrget" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultType="java.lang.Integer">
+		
+			SELECT 
+				COUNT(a.BBS_ID)
+			FROM
+				LETTNBBSMASTER a
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM004' AND USE_AT='Y') b
+				ON a.BBS_TY_CODE = b.CODE
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM009' AND USE_AT='Y') c
+				ON a.BBS_ATTRB_CODE = c.CODE,
+			LETTNBBSUSE d
+			WHERE 
+				a.BBS_ID = d.BBS_ID
+			AND
+				d.TRGET_ID = #{trgetId}
+		
+			<if test="searchCnd == 0">AND
+					a.BBS_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					b.CODE_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>	
+	</select>
+
+	<select id="selectNotUsedBdMstrList" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultMap="userMngList">
+		
+		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
+			SELECT 
+				a.BBS_ID, a.BBS_TY_CODE, b.CODE_NM as BBS_TY_CODE_NM,
+				a.BBS_ATTRB_CODE, c.CODE_NM as BBS_ATTRB_CODE_NM, a.BBS_NM, 
+				a.TMPLAT_ID, a.USE_AT, 
+				TO_CHAR(a.FRST_REGIST_PNTTM, 'YYYY-MM-DD') as FRST_REGIST_PNTTM
+				,row_number() over () AS rownum
+			FROM
+				LETTNBBSMASTER a
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM004' AND USE_AT='Y') b
+				ON a.BBS_TY_CODE = b.CODE
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM009' AND USE_AT='Y') c
+				ON a.BBS_ATTRB_CODE = c.CODE
+			WHERE a.USE_AT = 'Y'
+				AND a.BBS_ID NOT IN (SELECT BBS_ID FROM LETTNBBSUSE WHERE USE_AT = 'Y')
+		
+			<if test="searchCnd == 0">AND
+					a.BBS_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					b.CODE_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>	
+					
+			ORDER BY a.FRST_REGIST_PNTTM DESC 
+			) TB ) WHERE rn BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
+						
+	</select>	
+	
+	<select id="selectNotUsedBdMstrListCnt" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultType="java.lang.Integer">
+		
+			SELECT 
+				COUNT(a.BBS_ID)
+			FROM
+				LETTNBBSMASTER a
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM004' AND USE_AT='Y') b
+				ON a.BBS_TY_CODE = b.CODE
+			LEFT OUTER JOIN 
+				(SELECT CODE_ID, CODE, CODE_NM FROM 
+					LETTCCMMNDETAILCODE WHERE CODE_ID = 'COM009' AND USE_AT='Y') c
+				ON a.BBS_ATTRB_CODE = c.CODE
+			WHERE a.USE_AT = 'Y'
+				AND a.BBS_ID NOT IN (SELECT BBS_ID FROM LETTNBBSUSE WHERE USE_AT = 'Y') 
+		
+			<if test="searchCnd == 0">AND
+					a.BBS_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					b.CODE_NM LIKE '%' || #{searchWrd} || '%' 		
+			</if>	
+	</select>	
+
+
+</mapper>
