@@ -52,8 +52,9 @@
 	<select id="selectUserMngInfs" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultMap="userMngList">
 		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
 			SELECT 
-				user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id, user_seq,
-				row_number() over () AS rownum
+				user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id, user_seq
+				, use_at
+				, row_number() over () AS rownum
 			FROM
 				tb_cm_user a
 			WHERE 1=1	
