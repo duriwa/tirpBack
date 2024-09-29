@@ -1,4 +1,4 @@
-oracle 에서 Postgre 로 변경시 주의할 점
+oracle 에서 Postgre 로 변경시 주의할 점과 마이그레이션 참고 사항
 
 #pg admin
 
