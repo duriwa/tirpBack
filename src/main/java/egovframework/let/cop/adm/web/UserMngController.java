@@ -103,7 +103,7 @@ public class UserMngController {
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
 	@GetMapping(value = "/userMng")
-	public ResultVO selectBBSMasterInfs(HttpServletRequest request,
+	public ResultVO selectUserMngMasterInfs(HttpServletRequest request,
 		@Parameter(
 				in = ParameterIn.QUERY,
 				schema = @Schema(type = "object",
@@ -165,9 +165,9 @@ public class UserMngController {
 			@ApiResponse(responseCode = "200", description = "조회 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
-	@GetMapping(value ="/userMng/{bbsId}")
-	public ResultVO selectBBSMasterInf(HttpServletRequest request,
-			@Parameter(name = "userId", description = "사용자 Id", in = ParameterIn.PATH, example="BBSMSTR_AAAAAAAAAAAA") 
+	@GetMapping(value ="/userMng/{userId}")
+	public ResultVO selectUserMngMasterInf(HttpServletRequest request,
+			@Parameter(name = "userId", description = "사용자 Id", in = ParameterIn.PATH, example="UserMngMSTR_AAAAAAAAAAAA") 
 			@PathVariable("userId") String userId)
 		throws Exception {
 		ResultVO resultVO = new ResultVO();
@@ -184,7 +184,7 @@ public class UserMngController {
 		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
 		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
 
-		// return "cop/bbs/EgovBoardMstrUpdt";
+		// return "cop/user/EgovBoardMstrUpdt";
 		return resultVO;
 	}
 
@@ -209,7 +209,7 @@ public class UserMngController {
 			@ApiResponse(responseCode = "900", description = "입력값 무결성 오류")
 	})
 	@PostMapping(value ="/userMng")
-	public ResultVO insertBBSMasterInf(HttpServletRequest request,
+	public ResultVO insertUserMngMasterInf(HttpServletRequest request,
 									   UserMngVO userMngVO,
 									   BindingResult bindingResult,
 									   @Parameter(hidden = true) @AuthenticationPrincipal LoginVO loginVO
@@ -259,7 +259,7 @@ public class UserMngController {
 	 * 사용자 정보를 수정한다.
 	 *
 	 * @param request
-	 * @param bbsId
+	 * @param userId
 	 * @param userMngVO
 	 * @param bindingResult
 	 * @return resultVO
@@ -276,10 +276,10 @@ public class UserMngController {
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님"),
 			@ApiResponse(responseCode = "900", description = "입력값 무결성 오류")
 	})
-	@PutMapping(value ="/userMng/{bbsId}")
-	public ResultVO updateBBSMasterInf(HttpServletRequest request,
-			@Parameter(name = "bbsId", description = "사용자 Id", in = ParameterIn.PATH, example="BBSMSTR_AAAAAAAAAAAA")
-				@PathVariable("bbsId") String bbsId,
+	@PutMapping(value ="/userMng/{userId}")
+	public ResultVO updateUserMngMasterInf(HttpServletRequest request,
+			@Parameter(name = "userId", description = "사용자 Id", in = ParameterIn.PATH, example="UserMngMSTR_AAAAAAAAAAAA")
+				@PathVariable("userId") String userId,
 				@RequestBody UserMngVO userMngVO,
 				BindingResult bindingResult,
 				@Parameter(hidden = true) @AuthenticationPrincipal LoginVO loginVO
@@ -315,7 +315,7 @@ public class UserMngController {
 	 * 사용자 정보를 삭제한다.
 	 *
 	 * @param request
-	 * @param bbsId
+	 * @param userId
 	 * @param userMngVO
 	 * @return resultVO
 	 * @throws Exception
@@ -331,9 +331,9 @@ public class UserMngController {
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
 	@PatchMapping(value ="/userMng/{bbsId}")
-	public ResultVO deleteBBSMasterInf(HttpServletRequest request,
+	public ResultVO deleteUserMngMasterInf(HttpServletRequest request,
 		@Parameter(hidden = true) @AuthenticationPrincipal LoginVO loginVO,
-		@Parameter(name = "userId", description = "사용자 Id", in = ParameterIn.PATH, example="BBSMSTR_AAAAAAAAAAAA")
+		@Parameter(name = "userId", description = "사용자 Id", in = ParameterIn.PATH, example="UserMngMSTR_AAAAAAAAAAAA")
 		@PathVariable("userId") String userId
 		) throws Exception {
 		
