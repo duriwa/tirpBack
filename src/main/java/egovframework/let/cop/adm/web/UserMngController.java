@@ -330,7 +330,7 @@ public class UserMngController {
 			@ApiResponse(responseCode = "200", description = "삭제 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
-	@PatchMapping(value ="/userMng/{bbsId}")
+	@PatchMapping(value ="/userMng/{userId}")
 	public ResultVO deleteUserMngMasterInf(HttpServletRequest request,
 		@Parameter(hidden = true) @AuthenticationPrincipal LoginVO loginVO,
 		@Parameter(name = "userId", description = "사용자 Id", in = ParameterIn.PATH, example="UserMngMSTR_AAAAAAAAAAAA")
@@ -340,7 +340,7 @@ public class UserMngController {
 			ResultVO resultVO = new ResultVO();
 			UserMngVO userMngVO = new UserMngVO();
 			
-			userMngVO.setLastProcId(loginVO.getUniqId());
+			userMngVO.setLastProcId(loginVO.getId());
 			userMngVO.setUserId(userId);
 			
 			userMngService.deleteUserMngInf(userMngVO);
