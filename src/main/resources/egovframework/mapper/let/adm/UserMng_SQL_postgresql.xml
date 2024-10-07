@@ -96,7 +96,8 @@
 	<select id="selectUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng" resultMap="userMngDetail">
 		
 			SELECT 
-				a.user_id, a.user_nm, a.user_pw, a.frst_reg_dt, a.frst_reg_id, a.last_proc_dt, a.last_proc_id, a.user_seq				
+				a.user_id, a.user_nm, a.user_pw, a.frst_reg_dt, a.frst_reg_id, a.last_proc_dt, a.last_proc_id, a.user_seq
+				, a.use_at				
 			FROM
 				tb_cm_user a
 			WHERE a.user_id = #{userId}
