@@ -49,13 +49,6 @@ public class UserMngServiceImpl extends EgovAbstractServiceImpl implements UserM
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertyService;
 
-    //---------------------------------
-    // 2009.06.26 : 2단계 기능 추가
-    //---------------------------------
-    // @Resource(name = "BBSAddedOptionsDAO")
-    // private BBSAddedOptionsDAO addedOptionsDAO;
-    ////-------------------------------
-
     /**
      * 등록된 사용자 속성정보를 삭제한다.
      *
@@ -78,76 +71,11 @@ public class UserMngServiceImpl extends EgovAbstractServiceImpl implements UserM
      * @see egovframework.let.cop.bbs.brd.service.EgovBBSAttributeManageService#insertUserMngInf(egovframework.let.cop.bbs.brd.service.UserMng)
      */
     public String insertUserMngInf(UserMngVO userMngVO) throws Exception {
-	String bbsId = idgenService.getNextStringId();
-
-	userMngVO.setUserId(bbsId);
-
 	userMngDAO.insertUserMngInf(userMngVO);
 
-	//---------------------------------
-	// 2009.06.26 : 2단계 기능 추가
-	//---------------------------------
-	// if (userMngVO.getOption().equals("comment") || userMngVO.getOption().equals("stsfdg")) {
-	//     addedOptionsDAO.insertAddedOptionsInf(userMngVO);
-	// }
-	////-------------------------------
-
-	// if ("Y".equals(userMngVO.getUseAt())) {
-	//     // UserMngVO userMngVO = new UserMngVO();
-
-	//     userMngVO.setUserId(bbsId);
-	//     userMngVO.setFrstRegisterId(userMngVO.getFrstRegisterId());
-	//     userMngVO.setUseAt("Y");
-
-	//     userMngDAO.insertUserMngInf(userMngVO);
-
-	//     UserInfVO userVO = new UserInfVO();
-	//     userVO.setTrgetId(userMngVO.getTrgetId());
-
-	//     List<UserInfVO> tmpList = null;
-	//     Iterator<UserInfVO> iter = null;
-
-	//     if ("REGC05".equals(userMngVO.getRegistSeCode())) {
-	// 	tmpList = userService.selectAllClubUser(userVO);
-	// 	iter = tmpList.iterator();
-	// 	while (iter.hasNext()) {
-	// 	    bdUseInf = new UserMngInf();
-
-	// 	    bdUseInf.setBbsId(bbsId);
-	// 	    bdUseInf.setTrgetId(((UserInfVO)iter.next()).getUniqId());
-	// 	    bdUseInf.setRegistSeCode("REGC07");
-	// 	    bdUseInf.setUseAt("Y");
-	// 	    bdUseInf.setFrstRegisterId(userMngVO.getFrstRegisterId());
-
-	// 	    bbsUseDAO.insertBBSUseInf(bdUseInf);
-	// 	}
-	//     } else if ("REGC06".equals(userMngVO.getRegistSeCode())) {
-	// 	tmpList = userService.selectAllCmmntyUser(userVO);
-	// 	iter = tmpList.iterator();
-	// 	while (iter.hasNext()) {
-	// 	    bdUseInf = new UserMngInf();
-
-	// 	    bdUseInf.setBbsId(bbsId);
-	// 	    bdUseInf.setTrgetId(((UserInfVO)iter.next()).getUniqId());
-	// 	    bdUseInf.setRegistSeCode("REGC07");
-	// 	    bdUseInf.setUseAt("Y");
-	// 	    bdUseInf.setFrstRegisterId(userMngVO.getFrstRegisterId());
-
-	// 	    bbsUseDAO.insertBBSUseInf(bdUseInf);
-	// 	}
-	//     }
-	// }
-	return bbsId;
+	return userMngVO.getUserId();
     }
 
-    /**
-     * 사용자 속성 정보의 목록을 조회 한다.
-     *
-     * @see egovframework.let.cop.bbs.brd.service.EgovBBSAttributeManageService#selectAllBBSMasteInf(egovframework.let.cop.adm.service.brd.service.UserMngVO)
-     */
-    public List<UserMngVO> selectAllUserMngInf(UserMngVO vo) throws Exception {
-	return userMngDAO.selectAllUserMngInf(vo);
-    }
 
     /**
      * 사용자 속성정보 한 건을 상세조회한다.
@@ -161,23 +89,6 @@ public class UserMngServiceImpl extends EgovAbstractServiceImpl implements UserM
 	//return attrbMngDAO.selectUserMngInf(searchVO);
 
 	UserMngVO result = userMngDAO.selectUserMngInf(searchVO);
-
-	// String flag = propertyService.getString("Globals.addedOptions");
-	// if (flag != null && flag.trim().equalsIgnoreCase("true")) {
-	//     UserMngVO options = addedOptionsDAO.selectAddedOptionsInf(searchVO);
-
-	//     if (options != null) {
-	// 	if (options.getCommentAt().equals("Y")) {
-	// 	    result.setOption("comment");
-	// 	}
-
-	// 	if (options.getStsfdgAt().equals("Y")) {
-	// 	    result.setOption("stsfdg");
-	// 	}
-	//     } else {
-	// 	result.setOption("na");	// 미지정 상태로 수정 가능 (이미 지정된 경우는 수정 불가로 처리)
-	//     }
-	// }
 
 	return result;
 	////-------------------------------
@@ -208,27 +119,6 @@ public class UserMngServiceImpl extends EgovAbstractServiceImpl implements UserM
      */
     public void updateUserMngInf(UserMngVO userMng) throws Exception {
 		userMngDAO.updateUserMngInf(userMng);
-
-	//---------------------------------
-	// 2009.06.26 : 2단계 기능 추가
-	//---------------------------------
-	// String flag = propertyService.getString("Globals.addedOptions");
-	// if (flag != null && flag.trim().equalsIgnoreCase("true")) {
-	//     if (boardMaster.getOption().equals("na")) {
-	// 	return;
-	//     }
-	//     UserMngVO options = addedOptionsDAO.selectAddedOptionsInf(boardMaster);
-
-	//     if (options == null) {
-	// 	boardMaster.setFrstRegisterId(boardMaster.getLastUpdusrId());
-	// 	addedOptionsDAO.insertAddedOptionsInf(boardMaster);
-	//     } else {
-	// 	//수정 기능 제외 (새롭게 선택사항을 지정한 insert만 처리함)
-	// 	//addedOptionsDAO.updateAddedOptionsInf(boardMaster);
-	// 	log.debug("BBS Master update ignored...");
-	//     }
-	// }
-	////-------------------------------
     }
 
     /**
@@ -241,40 +131,16 @@ public class UserMngServiceImpl extends EgovAbstractServiceImpl implements UserM
     }
 
     /**
-     * 사용중인 사용자 속성 정보의 목록을 조회 한다.
+     * 사용자 정보를 확인합니다.
+     *
+     * @param userMngVO 사용자 정보를 담고 있는 UserMngVO 객체
+     * @return 존재하는 고개인지 일치 여부 (true: 일치, false: 불일치)
+     * @throws Exception 데이터베이스 조회 중 발생할 수 있는 예외
      */
-    public Map<String, Object> selectUserMngListByTrget(UserMngVO vo) throws Exception {
-	List<UserMngVO> result = userMngDAO.selectUserMngListByTrget(vo);
-	int cnt = userMngDAO.selectUserMngListCntByTrget(vo);
-
-	Map<String, Object> map = new HashMap<String, Object>();
-
-	map.put("resultList", result);
-	map.put("resultCnt", Integer.toString(cnt));
-
-	return map;
+    public boolean isUserMng(UserMngVO userMngVO) throws Exception {
+        int matchCount = userMngDAO.selectUserMngCount(userMngVO);
+        return matchCount > 0;
     }
 
-    /**
-     * 커뮤니티, 동호회에서 사용중인 사용자 속성 정보의 목록을 전체조회 한다.
-     */
-    public List<UserMngVO> selectAllUserMngByTrget(UserMngVO vo) throws Exception {
-	return userMngDAO.selectAllUserMngByTrget(vo);
-    }
-
-    /**
-     * 사용중이지 않은 사용자 속성 정보의 목록을 조회 한다.
-     */
-    public Map<String, Object> selectNotUsedUserMngList(UserMngVO searchVO) throws Exception {
-	List<UserMngVO> result = userMngDAO.selectNotUsedUserMngList(searchVO);
-	int cnt = userMngDAO.selectNotUsedUserMngListCnt(searchVO);
-
-	Map<String, Object> map = new HashMap<String, Object>();
-
-	map.put("resultList", result);
-	map.put("resultCnt", Integer.toString(cnt));
-
-	return map;
-    }
 
 }

@@ -65,6 +65,12 @@ public class UserMng implements Serializable {
     @Schema(description = "rownum")
     private String rownum;
 
+    @Schema(description = "기존 비밀번호")
+    private String oldPassword;
+
+    @Schema(description = "새 비밀번호")
+    private String newPassword;
+
     //---------------------------------
     // 2009.06.26 : 2단계 기능 추가
     //---------------------------------

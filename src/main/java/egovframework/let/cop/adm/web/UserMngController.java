@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import org.hsqldb.lib.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ import egovframework.com.cmm.service.EgovCmmUseService;
 import egovframework.com.cmm.service.ResultVO;
 import egovframework.let.cop.adm.service.UserMngService;
 import egovframework.let.cop.adm.service.UserMngVO;
+import egovframework.let.utl.sim.service.EgovFileScrty;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.Explode;
@@ -217,6 +219,7 @@ public class UserMngController {
 		throws Exception {
 		ResultVO resultVO = new ResultVO();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String encNewPassword = "";
 
 		beanValidator.validate(userMngVO, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -242,9 +245,22 @@ public class UserMngController {
 			return resultVO;
 		}
 
-		// userMngVO.setFrstRegisterId(loginVO.getUniqId());
+		UserMngVO checkVO = new UserMngVO();
+		checkVO.setUserId(userMngVO.getUserId());
+
+		// 기존 등록된 사용자 인지 확인
+		if (userMngService.isUserMng(checkVO)) {
+			resultVO.setResultCode(ResponseCode.INPUT_CHECK_ERROR.getCode());
+			resultVO.setResultMessage("등록되어 있는 사용자 아이디 입니다.");
+			return resultVO;
+		}
+
+
 		userMngVO.setUseAt("Y");
-		// userMngVO.setTrgetId("SYSTEMDEFAULT_REGIST");
+		//비밀번호 암호화해서 등록
+		encNewPassword = EgovFileScrty.encryptPassword(userMngVO.getNewPassword(), userMngVO.getUserId());
+		userMngVO.setUserPw(encNewPassword);
+
 
 		userMngService.insertUserMngInf(userMngVO);
 
@@ -300,8 +316,32 @@ public class UserMngController {
 			return resultVO;
 		}
 
-		// userMngVO.setLastUpdusrId(loginVO.getUniqId());
-		// userMngVO.setPosblAtchFileSize(propertyService.getString("posblAtchFileSize"));
+		String encOldPassword = "";
+		String encNewPassword = "";
+
+		//패스워드 변경
+		if(!StringUtil.isEmpty(userMngVO.getOldPassword())
+			&& !StringUtil.isEmpty(userMngVO.getNewPassword())
+		){
+
+			encOldPassword = EgovFileScrty.encryptPassword(userMngVO.getOldPassword(), userMngVO.getUserId());
+
+			UserMngVO checkVO = new UserMngVO();
+			checkVO.setUserId(userMngVO.getUserId());
+			checkVO.setUserPw(encOldPassword);
+
+			// 기존 비밀번호 확인
+			if (!userMngService.isUserMng(checkVO)) {
+				resultVO.setResultCode(ResponseCode.INPUT_CHECK_ERROR.getCode());
+				resultVO.setResultMessage("기존 비밀번호가 일치하지 않습니다.");
+				return resultVO;
+			}
+
+			encNewPassword = EgovFileScrty.encryptPassword(userMngVO.getNewPassword(), userMngVO.getUserId());
+
+			userMngVO.setUserPw(encNewPassword);
+		}
+
 		userMngService.updateUserMngInf(userMngVO);
 
 		resultVO.setResult(resultMap);

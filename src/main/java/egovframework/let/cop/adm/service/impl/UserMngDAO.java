@@ -73,6 +73,16 @@ public class UserMngDAO extends EgovAbstractMapper {
     public int selectUserMngInfsCnt(UserMngVO vo) throws Exception {
 	return (Integer)selectOne("UserMngDAO.selectUserMngInfsCnt", vo);
     }
+    /**
+     * 사용자를 확인합니다.
+     *
+     * @param UserMng
+     * @return 일치하는 사용자 개수
+     * @throws Exception
+     */
+    public int selectUserMngCount(UserMngVO userMngVO) throws Exception {
+        return (Integer)selectOne("UserMngDAO.selectUserMngCount", userMngVO);
+    }
 
     /**
      * 게시판 속성정보를 수정한다.
@@ -92,72 +102,10 @@ public class UserMngDAO extends EgovAbstractMapper {
 	return true;
     }
 
-    /**
-     * 유효한 게시판 목록을 불러온다.
-     *
-     * @param vo
-     * @return
-     * @throws Exception
-     */
-    @SuppressWarnings("unchecked")
-    public List<UserMngVO> selectAllUserMngInf(UserMngVO vo) throws Exception {
-	// 커뮤니티, 동호회의 게시판이 나오지 않도록 LETTNBBSUSE 테이블과 Join 필요
-	return (List<UserMngVO>) list("UserMngDAO.selectAllUserMng", vo);
-    }
+    
 
-    /**
-     * 사용중인 게시판 속성정보 목록을 조회한다.
-     *
-     * @param UserMngVO
-     */
-    @SuppressWarnings("unchecked")
-    public List<UserMngVO> selectUserMngListByTrget(UserMngVO vo) throws Exception {
-	return (List<UserMngVO>) list("UserMngDAO.selectUserMngListByTrget", vo);
-    }
 
-    /**
-     * 사용중인 게시판 속성정보 목록 숫자를 조회한다
-     *
-     * @param vo
-     * @return
-     * @throws Exception
-     */
-    public int selectUserMngListCntByTrget(UserMngVO vo) throws Exception {
-	return (Integer)selectOne("UserMngDAO.selectUserMngListCntByTrget", vo);
-    }
 
-    /**
-     * 커뮤니티, 동호회등 게시판 사용등록이 된 게시판 목록 전체를 불러온다.
-     *
-     * @param vo
-     * @return
-     * @throws Exception
-     */
-    @SuppressWarnings("unchecked")
-    public List<UserMngVO> selectAllUserMngByTrget(UserMngVO vo) throws Exception {
-	return (List<UserMngVO>) list("UserMngDAO.selectAllUserMngByTrget", vo);
-    }
-
-    /**
-     * 사용 중이지 않은 게시판 속성정보 목록을 조회한다.
-     *
-     * @param UserMngVO
-     */
-    @SuppressWarnings("unchecked")
-    public List<UserMngVO> selectNotUsedUserMngList(UserMngVO vo) throws Exception {
-	return (List<UserMngVO>) list("UserMngDAO.selectNotUsedUserMngList", vo);
-    }
-
-    /**
-     * 사용 중이지 않은 게시판 속성정보 목록 숫자를 조회한다
-     *
-     * @param vo
-     * @return
-     * @throws Exception
-     */
-	public int selectNotUsedUserMngListCnt(UserMngVO vo) throws Exception {
-	return (Integer)selectOne("UserMngDAO.selectNotUsedUserMngListCnt", vo);
-    }
-
+    
     
 }

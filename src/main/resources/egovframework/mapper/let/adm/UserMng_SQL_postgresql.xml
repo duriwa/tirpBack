@@ -12,7 +12,6 @@
 		<result property="frstRegId" column="frst_reg_id"/>
 		<result property="lastProcDt" column="last_proc_dt"/>
 		<result property="lastProcId" column="last_proc_id"/>
-		<result property="userSeq" column="user_seq"/>
 		<result property="useAt" column="use_at"/>
 		<result property="rownum" column="rownum"/>
 	</resultMap>
@@ -25,7 +24,6 @@
 		<result property="frstRegId" column="frst_reg_id"/>
 		<result property="lastProcDt" column="last_proc_dt"/>
 		<result property="lastProcId" column="last_proc_id"/>
-		<result property="userSeq" column="user_seq"/>
 		<result property="useAt" column="use_at"/>
 	</resultMap>
 
@@ -35,10 +33,10 @@
 		
 			INSERT INTO tb_cm_user
 			(user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id
-			, user_seq, use_at)
+			, use_at)
 			VALUES
 			( #{userId}, #{userNm}, #{userPw}, CURRENT_TIMESTAMP, #{frstRegId}, CURRENT_TIMESTAMP, #{lastProcId}
-			, #{userSeq}, #{useAt}  
+			, #{useAt}  
 			 )			
 		
 	</insert>
@@ -47,7 +45,7 @@
 	<select id="selectUserMngInfs" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultMap="userMngList">
 		SELECT * FROM ( SELECT rownum rn, TB.* FROM (
 			SELECT 
-				user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id, user_seq
+				user_id, user_nm, user_pw, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id
 				, use_at
 				, row_number() over () AS rownum
 			FROM
@@ -96,13 +94,25 @@
 	<select id="selectUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng" resultMap="userMngDetail">
 		
 			SELECT 
-				a.user_id, a.user_nm, a.user_pw, a.frst_reg_dt, a.frst_reg_id, a.last_proc_dt, a.last_proc_id, a.user_seq
+				a.user_id, a.user_nm, a.user_pw, a.frst_reg_dt, a.frst_reg_id, a.last_proc_dt, a.last_proc_id
 				, a.use_at				
 			FROM
 				tb_cm_user a
 			WHERE a.user_id = #{userId}
 						
-	</select> 
+	</select>
+
+	<!--사용자 일치 여부 조회-->
+	<select id="selectUserMngCount" parameterType="egovframework.let.cop.adm.service.UserMng" resultType="java.lang.Integer">
+			SELECT 
+				count(user_id)
+			FROM
+				tb_cm_user a
+			WHERE a.user_id = #{userId}
+			<if test="userPw != null and userPw != ''">
+				AND a.user_pw = #{userPw}
+			</if>
+	</select>
  
 	<!--사용자 수정-->
  	<update id="updateUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng">

@@ -43,27 +43,6 @@ public interface UserMngService {
 	  throws Exception;
 
 	/**
-	 * 유효한 사용자 마스터 정보를 호출한다.
-	 * @param searchVO
-	 * @return
-	 * 
-	 * @param userMngVO
-	 * @exception Exception Exception
-	 */
-	public List<UserMngVO> selectAllUserMngInf(UserMngVO userMngVO)
-	  throws Exception;
-
-	/**
-	 * 커뮤니티, 동호회에서 사용중인 사용자 속성 정보의 목록을 전체조회 한다.
-	 * @return
-	 * 
-	 * @param userMngVO
-	 * @exception Exception Exception
-	 */
-	public List<UserMngVO> selectAllUserMngByTrget(UserMngVO userMngVO)
-	  throws Exception;
-
-	/**
 	 * 사용자 속성정보 한 건을 상세조회한다.
 	 * @param UserMngVO
 	 * 
@@ -84,24 +63,16 @@ public interface UserMngService {
 	  throws Exception;
 
 	/**
-	 * 사용중인 사용자 속성 정보의 목록을 조회 한다.
+	 * 사용자 정보를 확인한다.
 	 * @param UserMngVO
 	 * 
 	 * @param userMngVO
+	 * @return boolean
 	 * @exception Exception Exception
 	 */
-	public Map<String, Object> selectUserMngListByTrget(UserMngVO userMngVO)
+	public boolean isUserMng(UserMngVO userMngVO)
 	  throws Exception;
 
-	/**
-	 * 사용중이지 않은 사용자 속성 정보의 목록을 조회 한다.
-	 * @return
-	 * 
-	 * @param userMngVO
-	 * @exception Exception Exception
-	 */
-	public Map<String, Object> selectNotUsedUserMngList(UserMngVO userMngVO)
-	  throws Exception;
 
 	/**
 	 * 사용자 속성정보를 수정한다.
