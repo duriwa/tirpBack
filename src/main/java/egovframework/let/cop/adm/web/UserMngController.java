@@ -261,6 +261,8 @@ public class UserMngController {
 		encNewPassword = EgovFileScrty.encryptPassword(userMngVO.getNewPassword(), userMngVO.getUserId());
 		userMngVO.setUserPw(encNewPassword);
 
+		userMngVO.setFrstRegId(loginVO.getId());
+		userMngVO.setLastProcId(loginVO.getId());
 
 		userMngService.insertUserMngInf(userMngVO);
 
@@ -342,6 +344,7 @@ public class UserMngController {
 			userMngVO.setUserPw(encNewPassword);
 		}
 
+		userMngVO.setLastProcId(loginVO.getId());
 		userMngService.updateUserMngInf(userMngVO);
 
 		resultVO.setResult(resultMap);
