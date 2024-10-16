@@ -127,11 +127,7 @@
 
 	<!--사용자 삭제-->
  	<update id="deleteUserMngInf" parameterType="egovframework.let.cop.adm.service.UserMng">
- 		
-			UPDATE tb_cm_user SET 
-				USE_AT = 'N',
-				last_proc_id = #{lastProcId},
-				last_proc_dt = CURRENT_TIMESTAMP
+ 		DELETE FROM tb_cm_user
 			WHERE user_id = #{userId}
 	
  	</update>

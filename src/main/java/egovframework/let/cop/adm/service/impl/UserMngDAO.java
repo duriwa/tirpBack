@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import egovframework.let.cop.adm.service.UserMngVO;
 
 /**
- * 게시판 속성정보 관리를 위한 데이터 접근 클래스
+ * 사용자 속성정보 관리를 위한 데이터 접근 클래스
  * @author 공통 서비스 개발팀 이삼섭
  * @since 2009.03.12
  * @version 1.0
@@ -27,16 +27,16 @@ import egovframework.let.cop.adm.service.UserMngVO;
 public class UserMngDAO extends EgovAbstractMapper {
 
     /**
-     * 등록된 게시판 속성정보를 삭제한다.
+     * 등록된 사용자 속성정보를 삭제한다.
      *
      * @param UserMngVO
      */
     public void deleteUserMngInf(UserMngVO userMngVO) throws Exception {
-	update("UserMngDAO.deleteUserMngInf", userMngVO);
+	delete("UserMngDAO.deleteUserMngInf", userMngVO);
     }
 
     /**
-     * 신규 게시판 속성정보를 등록한다.
+     * 신규 사용자 속성정보를 등록한다.
      *
      * @param UserMng
      */
@@ -45,7 +45,7 @@ public class UserMngDAO extends EgovAbstractMapper {
     }
 
     /**
-     * 게시판 속성정보 한 건을 상세조회 한다.
+     * 사용자 속성정보 한 건을 상세조회 한다.
      *
      * @param UserMngVO
      */
@@ -54,7 +54,7 @@ public class UserMngDAO extends EgovAbstractMapper {
     }
 
     /**
-     * 게시판 속성정보 목록을 조회한다.
+     * 사용자 속성정보 목록을 조회한다.
      *
      * @param UserMngVO
      */
@@ -64,7 +64,7 @@ public class UserMngDAO extends EgovAbstractMapper {
     }
 
     /**
-     * 게시판 속성정보 목록 숫자를 조회한다
+     * 사용자 속성정보 목록 숫자를 조회한다
      *
      * @param vo
      * @return
@@ -85,7 +85,7 @@ public class UserMngDAO extends EgovAbstractMapper {
     }
 
     /**
-     * 게시판 속성정보를 수정한다.
+     * 사용자정보를 수정한다.
      *
      * @param UserMng
      */
