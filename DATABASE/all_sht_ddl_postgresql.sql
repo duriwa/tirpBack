@@ -271,7 +271,7 @@ AS
 
 -- Table: public.tb_cm_user
 
--- DROP TABLE IF EXISTS public.tb_cm_user;
+DROP TABLE IF EXISTS public.tb_cm_user;
 
 CREATE TABLE IF NOT EXISTS public.tb_cm_user
 (
@@ -318,3 +318,58 @@ COMMENT ON COLUMN public.tb_cm_user.last_proc_id
 
 COMMENT ON COLUMN public.tb_cm_user.user_seq
     IS '사용자번호 (유니크키)';
+
+
+drop table IF EXISTS public.tb_cm_menu;
+
+CREATE TABLE IF NOT EXISTS public.tb_cm_menu
+(
+    menu_id character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    menu_nm character varying(50) COLLATE pg_catalog."default",
+    menu_level integer,
+    menu_order integer,
+    use_yn character(1) COLLATE pg_catalog."default",
+    pgm_nm character varying COLLATE pg_catalog."default",
+    frst_reg_dt date,
+    frst_reg_id character varying(10) COLLATE pg_catalog."default",
+    last_proc_dt date,
+    last_proc_id character varying COLLATE pg_catalog."default",
+    CONSTRAINT "TB_CM_MENU_pkey" PRIMARY KEY (menu_id)
+);
+
+
+ALTER TABLE IF EXISTS public.tb_cm_menu
+    OWNER to tireport;
+
+COMMENT ON TABLE public.tb_cm_menu
+    IS '메뉴 관리';
+
+COMMENT ON COLUMN public.tb_cm_menu.menu_id
+    IS '메뉴 ID';
+
+COMMENT ON COLUMN public.tb_cm_menu.menu_nm
+    IS '메뉴 명';
+
+COMMENT ON COLUMN public.tb_cm_menu.menu_level
+    IS '메뉴 레벨';
+
+COMMENT ON COLUMN public.tb_cm_menu.menu_order
+    IS '메뉴 정렬순서';
+
+COMMENT ON COLUMN public.tb_cm_menu.use_yn
+    IS '메뉴 사용여부';
+
+COMMENT ON COLUMN public.tb_cm_menu.pgm_nm
+    IS '메뉴프로그램이름';
+
+COMMENT ON COLUMN public.tb_cm_menu.frst_reg_dt
+    IS '최초 등록 일시';
+
+COMMENT ON COLUMN public.tb_cm_menu.frst_reg_id
+    IS '최초 등록자';
+
+COMMENT ON COLUMN public.tb_cm_menu.last_proc_dt
+    IS '최종 변경 일시';
+
+COMMENT ON COLUMN public.tb_cm_menu.last_proc_id
+    IS '최종 변경자';
