@@ -373,3 +373,86 @@ COMMENT ON COLUMN public.tb_cm_menu.last_proc_dt
 
 COMMENT ON COLUMN public.tb_cm_menu.last_proc_id
     IS '최종 변경자';
+
+
+DROP TABLE IF EXISTS public.tb_cm_cd_kind;
+
+CREATE TABLE IF NOT EXISTS public.tb_cm_cd_kind
+(
+    cd_kind_no character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    cd_kind_nm character varying(200) COLLATE pg_catalog."default",
+    cd_kind_desc character varying(500) COLLATE pg_catalog."default",
+    use_yn character varying(1) COLLATE pg_catalog."default",
+    frst_reg_dt date,
+    frst_reg_id character varying(10) COLLATE pg_catalog."default",
+    last_proc_dt date,
+    last_proc_id character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT tb_cm_cd_kind_pkey PRIMARY KEY (cd_kind_no)
+);    
+
+ALTER TABLE IF EXISTS public.tb_cm_cd_kind
+    OWNER to tireport;
+
+COMMENT ON TABLE public.tb_cm_cd_kind
+    IS '코드 관리';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.cd_kind_no
+    IS '코드 ID';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.cd_kind_nm
+    IS '코드 명';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.cd_kind_desc
+    IS '코드설명';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.use_yn
+    IS '코드사용여부';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.frst_reg_dt
+    IS '최초 등록 일시';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.frst_reg_id
+    IS '최초 등록자';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.last_proc_dt
+    IS '최종 변경 일시';
+
+COMMENT ON COLUMN public.tb_cm_cd_kind.last_proc_id
+    IS '최종 변경자';
+
+
+DROP TABLE IF EXISTS public.tb_cm_cd_desc;
+
+
+CREATE TABLE IF NOT EXISTS public.tb_cm_cd_desc
+(
+    cd_kind_no character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    cd_desc_no character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    cd_desc_nm character varying(200) COLLATE pg_catalog."default",
+    use_yn character varying(1) COLLATE pg_catalog."default",
+    frst_reg_dt date,
+    frst_reg_id character varying(10) COLLATE pg_catalog."default",
+    last_proc_dt date,
+    last_proc_id character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT tb_cm_cd_desc_pkey PRIMARY KEY (cd_desc_no)
+);    
+
+ALTER TABLE  public.tb_cm_cd_desc    OWNER to tireport;
+
+COMMENT ON TABLE public.tb_cm_cd_desc   IS '코드 상세 관리';
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.cd_kind_no    IS '코드 ID';
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.cd_desc_no    IS '코드상세 ID';    
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.cd_desc_nm    IS '코드상세 명';
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.use_yn    IS '코드사용여부';
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.frst_reg_dt    IS '최초 등록 일시';
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.frst_reg_id    IS '최초 등록자';
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.last_proc_dt    IS '최종 변경 일시';
+
+COMMENT ON COLUMN public.tb_cm_cd_desc.last_proc_id    IS '최종 변경자';
