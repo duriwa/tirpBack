@@ -1,6 +1,5 @@
 
 *.log
 *.class
-*.class
-*.class
 target/classes/egovframework/mapper/let/uat/uia/EgovLoginUsr_SQL_postgresql.xml
+target/*.*
