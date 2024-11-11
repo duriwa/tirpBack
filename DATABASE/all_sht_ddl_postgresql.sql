@@ -456,3 +456,72 @@ COMMENT ON COLUMN public.tb_cm_cd_desc.frst_reg_id    IS '최초 등록자';
 COMMENT ON COLUMN public.tb_cm_cd_desc.last_proc_dt    IS '최종 변경 일시';
 
 COMMENT ON COLUMN public.tb_cm_cd_desc.last_proc_id    IS '최종 변경자';
+
+-- Table: public.tb_sr_list
+DROP TABLE IF EXISTS public.tb_sr_list;
+
+CREATE TABLE IF NOT EXISTS public.tb_sr_list
+(
+    SEQ integer NOT NULL,
+    TEST_STEP character varying(1) COLLATE pg_catalog."default",
+    SR_STEP character varying(1) COLLATE pg_catalog."default",
+    SYSTEM_TYPE character varying(20) COLLATE pg_catalog."default",
+    TASK_TYPE character varying(20) COLLATE pg_catalog."default",
+    SR_NO character varying(11) COLLATE pg_catalog."default",
+    SR_NM character varying(200) COLLATE pg_catalog."default",
+    SAWON_CD character varying(8) COLLATE pg_catalog."default",
+    SAWON_NM character varying(20) COLLATE pg_catalog."default",
+    PL_NM character varying(20) COLLATE pg_catalog."default",
+    DEV_END_DATE date,
+    REAL_SET_DATE date,
+    TEST_PLAN character varying(200) COLLATE pg_catalog."default",
+    MONITER_PLAN character varying(200) COLLATE pg_catalog."default",
+    DEPLOY_LEVEL character varying(1) COLLATE pg_catalog."default",
+    DEPLOY_TYPE character varying(40) COLLATE pg_catalog."default",
+    REAL_SET_TIME character varying(20) COLLATE pg_catalog."default",
+    PACKAGE_YN character varying(1) COLLATE pg_catalog."default",
+    RESTART_YN character varying(1) COLLATE pg_catalog."default",
+    CHECKER character varying(20) COLLATE pg_catalog."default",
+    WK_SR_DATE character varying(10) COLLATE pg_catalog."default",
+    AUTH_LEVEL character varying(1) COLLATE pg_catalog."default",
+    HJSYYB character varying(1) COLLATE pg_catalog."default",
+    Z_CREATE_BY character varying(20) COLLATE pg_catalog."default",
+    Z_CREATE_DATE date,
+    Z_UPDATE_BY character varying(20) COLLATE pg_catalog."default",
+    Z_UPDATE_DATE date,
+    CONSTRAINT tb_sr_list_pkey PRIMARY KEY (SEQ)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tb_sr_list    OWNER to tireport;
+
+COMMENT ON TABLE public.tb_sr_list    IS '정기반영목록';
+
+COMMENT ON COLUMN public.tb_sr_list.SEQ    IS '순번';
+COMMENT ON COLUMN public.tb_sr_list.TEST_STEP    IS '현업테스트여부';
+COMMENT ON COLUMN public.tb_sr_list.SR_STEP    IS '형상진행여부';
+COMMENT ON COLUMN public.tb_sr_list.SYSTEM_TYPE    IS '시스템구분';
+COMMENT ON COLUMN public.tb_sr_list.TASK_TYPE    IS '업무구분';
+COMMENT ON COLUMN public.tb_sr_list.SR_NO    IS 'SR번호(형상번호)';
+COMMENT ON COLUMN public.tb_sr_list.SR_NM    IS '요청제목';
+COMMENT ON COLUMN public.tb_sr_list.SAWON_CD    IS '사원코드';
+COMMENT ON COLUMN public.tb_sr_list.SAWON_NM    IS '담당자명';
+COMMENT ON COLUMN public.tb_sr_list.PL_NM    IS '관련파트장';
+COMMENT ON COLUMN public.tb_sr_list.DEV_END_DATE    IS '개발완료 합의일';
+COMMENT ON COLUMN public.tb_sr_list.REAL_SET_DATE    IS '운영적용일자';
+COMMENT ON COLUMN public.tb_sr_list.TEST_PLAN    IS '테스트계획';
+COMMENT ON COLUMN public.tb_sr_list.MONITER_PLAN    IS '이관 후 모니터링 계획';
+COMMENT ON COLUMN public.tb_sr_list.DEPLOY_LEVEL    IS '운영 영향도(상,중,하)';
+COMMENT ON COLUMN public.tb_sr_list.DEPLOY_TYPE    IS '구분(SYSTEM,DB,DB(A),DB(B))';
+COMMENT ON COLUMN public.tb_sr_list.REAL_SET_TIME    IS '반영시간';
+COMMENT ON COLUMN public.tb_sr_list.PACKAGE_YN    IS '패키지 여부';
+COMMENT ON COLUMN public.tb_sr_list.RESTART_YN    IS '재기동 여부';
+COMMENT ON COLUMN public.tb_sr_list.CHECKER    IS '확인자';
+COMMENT ON COLUMN public.tb_sr_list.WK_SR_DATE    IS '금주반영일';
+COMMENT ON COLUMN public.tb_sr_list.AUTH_LEVEL    IS '취합권한(1:사용자,2:관리자)';
+COMMENT ON COLUMN public.tb_sr_list.HJSYYB    IS '현재사용여부';
+COMMENT ON COLUMN public.tb_sr_list.Z_CREATE_BY    IS '생성자';
+COMMENT ON COLUMN public.tb_sr_list.Z_CREATE_DATE    IS '생성일자';
+COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_BY    IS '수정자';
+COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_DATE     IS '수정일자';
