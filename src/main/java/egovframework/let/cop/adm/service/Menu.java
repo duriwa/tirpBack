@@ -25,7 +25,7 @@ import lombok.Setter;
  *
  *  </pre>
  */
-@Schema(description = "사용자 속성 정보 엔티티")
+@Schema(description = "메뉴 속성 정보 엔티티")
 @Getter
 @Setter
 public class Menu implements Serializable {
@@ -35,14 +35,16 @@ public class Menu implements Serializable {
 	 */
 	private static final long serialVersionUID = 2821358749509367821L;
 
-    @Schema(description = "사용자 아이디")
-    private String userId;
+    
 
-    @Schema(description = "사용자 이름")
-    private String userNm;
+    @Schema(description = "메뉴 아이디")
+    private String menuId;
 
-    @Schema(description = "사용자 비밀번호")
-    private String userPw;
+    @Schema(description = "메뉴 이름")
+    private String menuNm;
+
+    @Schema(description = "메뉴 레벨")
+    private String menuLevel;
 
     @Schema(description = "최초 등록 일자")
     private String frstRegDt;
@@ -56,33 +58,14 @@ public class Menu implements Serializable {
     @Schema(description = "마지막 처리 아이디")
     private String lastProcId;
 
-    @Schema(description = "사용자 시퀀스")
-    private String userSeq;
+    @Schema(description = "메뉴 시퀀스")
+    private String menuSeq;
 
     @Schema(description = "사용 여부")
     private String useAt;
 
     @Schema(description = "rownum")
     private String rownum;
-
-    @Schema(description = "기존 비밀번호")
-    private String oldPassword;
-
-    @Schema(description = "새 비밀번호")
-    private String newPassword;
-
-    //---------------------------------
-    // 2009.06.26 : 2단계 기능 추가
-    //---------------------------------
-	@Schema(description = "추가 option (댓글-comment, 만족도조사-stsfdg)")
-    private String option = "";
-
-	@Schema(description = "댓글 여부")
-    private String commentAt = "";
-
-	@Schema(description = "만족도조사")
-    private String stsfdgAt = "";
-    ////-------------------------------
 
     /**
      * toString 메소드를 대치한다.
