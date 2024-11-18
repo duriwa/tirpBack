@@ -16,7 +16,7 @@ import egovframework.let.cop.com.service.EgovUserInfManageService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 사용자 속성관리를 위한 서비스 구현 클래스
+ * 메뉴 속성관리를 위한 서비스 구현 클래스
  * @author 공통 서비스 개발팀 이삼섭
  * @since 2009.03.24
  * @version 1.0
@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MenuServiceImpl extends EgovAbstractServiceImpl implements MenuService {
 
     @Resource(name = "MenuDAO")
-    private MenuDAO userMngDAO;
+    private MenuDAO menuDAO;
 
     @Resource(name = "EgovUserInfManageService")
     private EgovUserInfManageService userService;
@@ -50,35 +50,34 @@ public class MenuServiceImpl extends EgovAbstractServiceImpl implements MenuServ
     protected EgovPropertyService propertyService;
 
     /**
-     * 등록된 사용자 속성정보를 삭제한다.
+     * 등록된 메뉴 속성정보를 삭제한다.
      *
      * @see egovframework.let.cop.bbs.brd.service.EgovBBSAttributeManageService#deleteMenuInf(egovframework.let.cop.bbs.brd.service.Menu)
      */
-    public void deleteMenuInf(MenuVO userMngVO) throws Exception {
-	userMngDAO.deleteMenuInf(userMngVO);
+    public void deleteMenuInf(MenuVO menuVO) throws Exception {
+        menuDAO.deleteMenuInf(menuVO);
 
-	MenuVO bdUseInf = new MenuVO();
+        MenuVO bdUseInf = new MenuVO();
 
-	bdUseInf.setUserId(userMngVO.getUserId());
-	bdUseInf.setLastProcId(userMngVO.getLastProcId());
+        bdUseInf.setLastProcId(menuVO.getLastProcId());
 
-	userMngDAO.deleteMenuInf(bdUseInf);
+        menuDAO.deleteMenuInf(bdUseInf);
     }
 
     /**
-     * 신규 사용자 속성정보를 생성한다.
+     * 신규 메뉴 속성정보를 생성한다.
      *
      * @see egovframework.let.cop.bbs.brd.service.EgovBBSAttributeManageService#insertMenuInf(egovframework.let.cop.bbs.brd.service.Menu)
      */
-    public String insertMenuInf(MenuVO userMngVO) throws Exception {
-	userMngDAO.insertMenuInf(userMngVO);
+    public String insertMenuInf(MenuVO menuVO) throws Exception {
+        menuDAO.insertMenuInf(menuVO);
 
-	return userMngVO.getUserId();
+        return null;
     }
 
 
     /**
-     * 사용자 속성정보 한 건을 상세조회한다.
+     * 메뉴 속성정보 한 건을 상세조회한다.
      *
      * @see egovframework.let.cop.bbs.brd.service.EgovBBSAttributeManageService#selectMenuInf(egovframework.let.cop.adm.service.brd.service.MenuVO)
      */
@@ -88,7 +87,7 @@ public class MenuServiceImpl extends EgovAbstractServiceImpl implements MenuServ
 	//---------------------------------
 	//return attrbMngDAO.selectMenuInf(searchVO);
 
-	MenuVO result = userMngDAO.selectMenuInf(searchVO);
+	MenuVO result = menuDAO.selectMenuInf(searchVO);
 
 	return result;
 	////-------------------------------
@@ -96,13 +95,13 @@ public class MenuServiceImpl extends EgovAbstractServiceImpl implements MenuServ
     }
 
     /**
-     * 사용자 속성 정보의 목록을 조회 한다.
+     * 메뉴 속성 정보의 목록을 조회 한다.
      *
      * @see egovframework.let.cop.bbs.brd.service.EgovBBSAttributeManageService#selectMenuInfs(egovframework.let.cop.adm.service.brd.service.MenuVO)
      */
     public Map<String, Object> selectMenuInfs(MenuVO searchVO) throws Exception {
-	List<MenuVO> result = userMngDAO.selectMenuInfs(searchVO);
-	int cnt = userMngDAO.selectMenuInfsCnt(searchVO);
+	List<MenuVO> result = menuDAO.selectMenuInfs(searchVO);
+	int cnt = menuDAO.selectMenuInfsCnt(searchVO);
 
 	Map<String, Object> map = new HashMap<String, Object>();
 
@@ -113,12 +112,12 @@ public class MenuServiceImpl extends EgovAbstractServiceImpl implements MenuServ
     }
 
     /**
-     * 사용자 속성정보를 수정한다.
+     * 메뉴 속성정보를 수정한다.
      *
      * @see egovframework.let.cop.bbs.brd.service.EgovBBSAttributeManageService#updateMenuInf(egovframework.let.cop.bbs.brd.service.Menu)
      */
-    public void updateMenuInf(MenuVO userMng) throws Exception {
-		userMngDAO.updateMenuInf(userMng);
+    public void updateMenuInf(MenuVO menu) throws Exception {
+		menuDAO.updateMenuInf(menu);
     }
 
     /**
@@ -131,14 +130,14 @@ public class MenuServiceImpl extends EgovAbstractServiceImpl implements MenuServ
     }
 
     /**
-     * 사용자 정보를 확인합니다.
+     * 메뉴 정보를 확인합니다.
      *
-     * @param userMngVO 사용자 정보를 담고 있는 MenuVO 객체
+     * @param menuVO 메뉴 정보를 담고 있는 MenuVO 객체
      * @return 존재하는 고개인지 일치 여부 (true: 일치, false: 불일치)
      * @throws Exception 데이터베이스 조회 중 발생할 수 있는 예외
      */
-    public boolean isMenu(MenuVO userMngVO) throws Exception {
-        int matchCount = userMngDAO.selectMenuCount(userMngVO);
+    public boolean isMenu(MenuVO menuVO) throws Exception {
+        int matchCount = menuDAO.selectMenuCount(menuVO);
         return matchCount > 0;
     }
 
