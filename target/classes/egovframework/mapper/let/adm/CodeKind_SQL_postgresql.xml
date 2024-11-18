@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CodeKindDAO">
+
+
+	<resultMap id="CodeKindList" type="egovframework.let.cop.adm.service.CodeKindVO">
+		<result property="cdKindNo" column="cd_kind_no"/>
+		<result property="cdKindNm" column="cd_kind_nm"/>
+		<result property="cdKindDesc" column="cd_kind_desc"/>
+		<result property="useYn" column="use_yn"/>
+		<result property="frstRegDt" column="frst_reg_dt"/>
+		<result property="frstRegId" column="frst_reg_id"/>
+		<result property="lastProcDt" column="last_proc_dt"/>
+		<result property="lastProcId" column="last_proc_id"/>
+		<result property="rownum" column="rownum"/>
+	</resultMap>
+
+	<resultMap id="CodeKindDetail" type="egovframework.let.cop.adm.service.CodeKindVO">
+		<result property="userId" column="user_id"/>
+		<result property="userNm" column="user_nm"/>
+		<result property="userPw" column="user_pw"/>
+		<result property="frstRegDt" column="frst_reg_dt"/>
+		<result property="frstRegId" column="frst_reg_id"/>
+		<result property="lastProcDt" column="last_proc_dt"/>
+		<result property="lastProcId" column="last_proc_id"/>
+		<result property="useAt" column="use_at"/>
+	</resultMap>
+
+
+	<!--11 공통코드 등록-->
+	<insert id="insertCodeKindInf" parameterType="egovframework.let.cop.adm.service.CodeKind">
+		
+		INSERT INTO tb_cm_cd_kind
+		( 
+			cd_kind_no, cd_kind_nm, cd_kind_desc, use_yn, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id
+		)
+	    VALUES (#{cdKindNo}, #{cdKindNm}, #{cdKindDesc}, #{useYn}, #{frstRegDt}, #{frstRegId}, #{lastProcDt}, #{lastProcId})
+		
+	</insert>
+	
+	<!-- 11 공통코드 목록 조회-->
+	<select id="selectCodeKindInfs" parameterType="egovframework.let.cop.adm.service.CodeKindVO" resultMap="CodeKindList">
+		SELECT * 
+		FROM 
+		( 
+			SELECT rownum rn, TB.* 
+			FROM 
+			(
+				SELECT 
+					cd_kind_no, cd_kind_nm, cd_kind_desc, use_yn, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id
+					, row_number() over () AS rownum
+				FROM tb_cm_cd_kind a
+			WHERE 1=1	
+			<if test="cdKindNm != null and cdKindNm != ''">
+				AND a.cd_kind_no = #{cdKindNo}
+			</if>
+			<if test="searchCnd == 0">AND
+					a.cd_kind_nm LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					a.cd_kind_desc LIKE '%' || #{searchWrd} || '%'		
+			</if>	
+	
+			ORDER BY a.frst_reg_dt DESC 
+			) TB 
+		)
+			WHERE rn BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
+
+	</select>	
+	
+	<!--사용자 목록 건수-->
+	<select id="selectUserMngInfsCnt" parameterType="egovframework.let.cop.adm.service.UserMngVO" resultType="java.lang.Integer">
+		
+			SELECT 
+				COUNT(a.user_id)
+			FROM
+				tb_cm_user a
+			WHERE 1=1 
+
+			<if test="useAt != null and useAt != ''">
+				AND a.USE_AT = #{useAt}
+			</if>
+			<if test="searchCnd == 0">AND
+					a.user_nm LIKE '%' || #{searchWrd} || '%' 		
+			</if>
+			<if test="searchCnd == 1">AND
+					a.user_id LIKE '%' || #{searchWrd} || '%' 		
+			</if>	
+
+	</select>	
+ 
+	<!--11 공통코드 상세정보 조회-->
+	<select id="selectCodeKindInf" parameterType="egovframework.let.cop.adm.service.CodeKind" resultMap="CodeKindDetail">
+		
+			SELECT 
+				cd_kind_no, cd_kind_nm, cd_kind_desc, use_yn, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id
+			FROM tb_cm_cd_kind 			
+			WHERE cd_kind_no = #{cdKindNo}
+						
+	</select>
+
+	<!--사용자 일치 여부 조회-->
+	<select id="selectUserMngCount" parameterType="egovframework.let.cop.adm.service.UserMng" resultType="java.lang.Integer">
+			SELECT 
+				count(user_id)
+			FROM
+				tb_cm_user a
+			WHERE a.user_id = #{userId}
+			<if test="userPw != null and userPw != ''">
+				AND a.user_pw = #{userPw}
+			</if>
+	</select>
+ 
+	<!--11 공통코드 수정-->
+ 	<update id="updateCodeKindInf" parameterType="egovframework.let.cop.adm.service.CodeKind">
+			UPDATE tb_cm_cd_kind
+			   SET cd_kind_nm = #{cdKindNm}, 
+			       cd_kind_desc = #{cdKindDesc}, 
+			       use_yn= #{useYn},  
+			       last_proc_dt= CURRENT_TIMESTAMP, 
+			       last_proc_id= #{lastProcId}
+			WHERE cd_kind_no = #{cdKindNo}
+ 	</update>
+
+	<!--11 공통코드 삭제-->
+ 	<update id="deleteCodeKindInf" parameterType="egovframework.let.cop.adm.service.CodeKind">
+ 		DELETE FROM tb_cm_cd_kind
+			WHERE cd_kind_no = #{cdKindNo}
+	
+ 	</update>
+
+</mapper>
