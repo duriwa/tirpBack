@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
-import org.egovframe.rte.fdl.idgnr.EgovIdGnrService;
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +26,6 @@ public class CodeKindServiceImpl extends EgovAbstractServiceImpl implements Code
 
     @Resource(name = "CodeKindDAO")
     private CodeKindDAO codeKindDAO;
-
-    @Resource(name = "egovCodeKindIdGnrService")
-    private EgovIdGnrService idgenService;
 
     @Resource(name = "propertiesService")
     protected EgovPropertyService propertyService;
@@ -54,6 +50,17 @@ public class CodeKindServiceImpl extends EgovAbstractServiceImpl implements Code
      */
     public CodeKindVO selectCodeKindInf(CodeKindVO searchVO) throws Exception {
         return codeKindDAO.selectCodeKindInf(searchVO);
+    }
+
+    public Map<String, Object> selectCodeKindInfs(CodeKindVO searchVO) throws Exception {
+        List<CodeKindVO> result = codeKindDAO.selectCodeKindInfs(searchVO);
+        int cnt = codeKindDAO.selectCodeKindInfsCnt(searchVO);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("resultList", result);
+        map.put("resultCnt", Integer.toString(cnt));
+
+        return map;
     }
 
     /**
@@ -84,4 +91,16 @@ public class CodeKindServiceImpl extends EgovAbstractServiceImpl implements Code
         int cnt = codeKindDAO.existCodeKind(codeKindVO);
         return cnt > 0;
     }
+
+    /**
+     * 코드 종류가 유효한지 확인한다.
+     */
+    public boolean isCode(CodeKindVO codeKindVO) throws Exception {
+        return codeKindDAO.validateTemplate(codeKindVO);
+    }
+
+    public void validateTemplate(CodeKindVO codeKindVO) throws Exception {
+        codeKindDAO.validateTemplate(codeKindVO);
+    }
+
 }

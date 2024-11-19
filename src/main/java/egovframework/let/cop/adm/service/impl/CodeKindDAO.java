@@ -92,6 +92,21 @@ public class CodeKindDAO extends EgovAbstractMapper {
 	return true;
     }
 
+    public int existCodeKind(CodeKindVO codeKindVO) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'existCodeKind'");
+    }
+
+    public List<CodeKindVO> selectCodeKindList(CodeKindVO searchVO) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'selectCodeKindList'");
+    }
+
+    public int selectCodeKindListCnt(CodeKindVO searchVO) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'selectCodeKindListCnt'");
+    }
+
     
 
 

@@ -46,7 +46,7 @@ public interface CodeKindService {
 	 * 
 	 * @exception Exception Exception
 	 */
-	public MenuVO selectCodeKindInf(CodeKindVO codeKindvo)
+	public CodeKindVO selectCodeKindInf(CodeKindVO codeKindvo)
 	  throws Exception;
 
 	/**
