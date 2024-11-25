@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="IntroWorkDAO">
+
+	<insert id="insWork" parameterType="egovframework.let.cop.work.service.IntroWorkVO">
+			INSERT INTO tb_wk_report
+
+			(SEQ, SAWON_CD, PART, GUBUN, SR_NO, SR_NM, DEV_ST_DT, DEV_END_DT, END_DT, PROG_RATE, PROG_STATUS,
+			 MEM_HOUR, BIGO, LEVEL, HJSYYB, Z_CREATE_BY, Z_CREATE_DATE, Z_UPDATE_BY, Z_UPDATE_DATE
+			 )
+			VALUES 
+			( '2', '70020', '3', #{gubun}, #{srNo}, '한길형', #{devStDt}, #{devEndDt}, #{endDt}, '10', #{progStatus},
+			 #{memHour}, #{bigo}, #{level}, '1', 'admin', CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP
+			 )			
+		
+	</insert>
+	
+</mapper>
