@@ -49,27 +49,6 @@ public class CodeKindServiceImpl extends EgovAbstractServiceImpl implements Code
         return "";
     }
 
-    /**
-     * 코드 종류 정보 한 건을 상세조회한다.
-     */
-    public CodeKindVO selectCodeKindInf(CodeKindVO searchVO) throws Exception {
-        return codeKindDAO.selectCodeKindInf(searchVO);
-    }
-
-    /**
-     * 코드 종류 정보의 목록을 조회한다.
-     */
-    public Map<String, Object> selectCodeKindList(CodeKindVO searchVO) throws Exception {
-        List<CodeKindVO> result = codeKindDAO.selectCodeKindList(searchVO);
-        int cnt = codeKindDAO.selectCodeKindListCnt(searchVO);
-
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("resultList", result);
-        map.put("resultCnt", Integer.toString(cnt));
-
-        return map;
-    }
-
       /**
      * 코드 종류 정보를 수정한다.
      */
@@ -77,11 +56,11 @@ public class CodeKindServiceImpl extends EgovAbstractServiceImpl implements Code
         codeKindDAO.updateCodeKindInf(codeKindVO);
     }
 
-    /**
-     * 코드 종류가 존재하는지 확인한다.
-     */
-    public boolean existCodeKind(CodeKindVO codeKindVO) throws Exception {
-        int cnt = codeKindDAO.existCodeKind(codeKindVO);
-        return cnt > 0;
+    // ... existing code ...
+    public Map<String, Object> selectCodeKindInfs(CodeKindVO codeKindVO) throws Exception {
+        List<CodeKindVO> result = codeKindDAO.selectCodeKindInfs(codeKindVO);
+        Map<String, Object> map = new HashMap<>();
+        map.put("resultList", result);
+        return map;
     }
 }

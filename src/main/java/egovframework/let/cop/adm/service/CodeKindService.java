@@ -41,15 +41,6 @@ public interface CodeKindService {
 	  throws Exception;
 
 	/**
-	 * 사용자 속성정보 한 건을 상세조회한다.
-	 * @param CodeKindVO
-	 * 
-	 * @exception Exception Exception
-	 */
-	public MenuVO selectCodeKindInf(CodeKindVO codeKindvo)
-	  throws Exception;
-
-	/**
 	 * 사용자 속성 정보의 목록을 조회 한다.
 	 * @param CodeKindVO
 	 * 
@@ -58,35 +49,5 @@ public interface CodeKindService {
 	public Map<String, Object> selectCodeKindInfs(CodeKindVO codeKindvo)
 	  throws Exception;
 
-	/**
-	 * 사용자 정보를 확인한다.
-	 * @param CodeKindVO
-	 * 
-	 * @return boolean
-	 * @exception Exception Exception
-	 */
-	public boolean isCode(CodeKindVO codeKindvo)
-	  throws Exception;
-
-
-	/**
-	 * 사용자 속성정보를 수정한다.
-	 * @param CodeKindVO
-	 * 
-	 * @param userMngVO
-	 * @exception Exception Exception
-	 */
-	public void updateCodeKindInf(CodeKindVO codeKindvo)
-	  throws Exception;
-
-	/**
-	 * 템플릿의 유효여부를 점검한다.
-	 * @param MenuVO
-	 * 
-	 * @param userMngVO
-	 * @exception Exception Exception
-	 */
-	public void validateTemplate(CodeKindVO codeKindvo)
-	  throws Exception;
 
 }
