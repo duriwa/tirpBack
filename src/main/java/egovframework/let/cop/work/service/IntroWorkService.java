@@ -1,5 +1,8 @@
 package egovframework.let.cop.work.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * 사용자 속성관리를 위한 서비스 인터페이스 클래스
  * @author 공통 서비스 개발팀 이삼섭
@@ -21,6 +24,10 @@ public interface IntroWorkService {
 
 	public int insWork(IntroWorkVO paramData)
 	  throws Exception;
+
+
+	public List<IntroWorkVO> srchWork(String paramData)
+	throws Exception;
 
 
 }

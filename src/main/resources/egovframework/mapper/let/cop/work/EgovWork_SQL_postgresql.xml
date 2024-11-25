@@ -10,10 +10,20 @@
 			 MEM_HOUR, BIGO, LEVEL, HJSYYB, Z_CREATE_BY, Z_CREATE_DATE, Z_UPDATE_BY, Z_UPDATE_DATE
 			 )
 			VALUES 
-			( '2', '70020', '3', #{gubun}, #{srNo}, '한길형', #{devStDt}, #{devEndDt}, #{endDt}, '10', #{progStatus},
+			( '3', '70020', '3', #{gubun}, #{srNo}, '한길형', #{devStDt}, #{devEndDt}, #{endDt}, '10', #{progStatus},
 			 #{memHour}, #{bigo}, #{level}, '1', 'admin', CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP
 			 )			
 		
 	</insert>
 	
+
+	<select id="srchWork" parameterType="String" resultType="HashMap">
+		SELECT *
+		FROM tb_wk_report
+		WHERE 1=1 AND
+		<if test="sawonCd != null and sawonCd != ''"> 
+			SAWON_CD = #{sawonCd}
+		</if>
+</select>
+
 </mapper>

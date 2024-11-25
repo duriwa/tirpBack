@@ -1,5 +1,8 @@
 package egovframework.let.cop.work.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
@@ -23,14 +26,12 @@ public class IntroWorkServiceImpl extends EgovAbstractServiceImpl implements Int
     @Resource(name = "IntroWorkDAO")
     private IntroWorkDAO introWorkDAO;
 
-    /**
-     * 코드 종류 정보를 삭제한다.
-     */
+
     public int insWork(IntroWorkVO paramData) throws Exception {
        return introWorkDAO.insWork(paramData);
-       
-
     }
 
-
+    public List<IntroWorkVO> srchWork(String paramData) throws Exception {
+        return introWorkDAO.srchWork(paramData);
+     }
 }

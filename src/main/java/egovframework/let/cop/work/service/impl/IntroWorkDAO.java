@@ -1,8 +1,12 @@
 package egovframework.let.cop.work.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.egovframe.rte.psl.dataaccess.EgovAbstractMapper;
 import org.springframework.stereotype.Repository;
 
+import egovframework.let.cop.bbs.service.BoardVO;
 import egovframework.let.cop.work.service.IntroWorkVO;
 
 /**
@@ -27,5 +31,11 @@ public class IntroWorkDAO extends EgovAbstractMapper {
 
     public int insWork(IntroWorkVO paramData) throws Exception {
         return insert("IntroWorkDAO.insWork", paramData);
+    }    
+
+
+    @SuppressWarnings({ "deprecation", "unchecked" })
+    public List<IntroWorkVO> srchWork(String paramData) throws Exception {
+        return (List<IntroWorkVO>)list("IntroWorkDAO.srchWork", paramData);
     }    
 }

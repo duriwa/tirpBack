@@ -1,10 +1,12 @@
 package egovframework.let.cop.work.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,7 +65,7 @@ public class IntroWorkController {
 	
 			ResultVO resultVO = new ResultVO();
 			
-			System.out.println("POST 들어옴?");
+			System.out.println("insWork ===== POST ");
 	
 	
 			int insData = this.itWorkService.insWork(paramData);
@@ -79,5 +81,28 @@ public class IntroWorkController {
 		return resultVO;
 	}
 
+
+	@PostMapping(value = "/srchWork")
+		public ResultVO srchWork (HttpServletRequest request) throws Exception {
+	
+			ResultVO resultVO = new ResultVO();
+			
+			System.out.println("srchWork ===== POST");
+	
+			// String 사번 = "";
+			List<IntroWorkVO> srchData = new ArrayList<IntroWorkVO>();
+
+			srchData = itWorkService.srchWork("70020");
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("result", srchData);
+ 
+		resultVO.setResult(resultMap);
+		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
+		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
+
+		return resultVO;
+	}
 
 }
