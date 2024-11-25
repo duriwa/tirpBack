@@ -60,8 +60,7 @@ public class IntroWorkController {
 			@ApiResponse(responseCode = "200", description = "성공")
 		})
 		@PostMapping(value = "/insWork")
-		public ResultVO insWork (@RequestBody IntroWorkVO paramData)
-			throws Exception {
+		public ResultVO insWork (@RequestBody IntroWorkVO paramData) throws Exception {
 	
 			ResultVO resultVO = new ResultVO();
 			
@@ -104,5 +103,52 @@ public class IntroWorkController {
 
 		return resultVO;
 	}
+
+
+	@PostMapping(value = "/insEtc")
+	public ResultVO insEtc (@RequestBody IntroWorkVO paramData) throws Exception {
+
+		ResultVO resultVO = new ResultVO();
+		
+		System.out.println("insEtc ===== POST ");
+
+
+		int insData = this.itWorkService.insEtc(paramData);
+
+	Map<String, Object> resultMap = new HashMap<String, Object>();
+
+	resultMap.put("result", insData);
+
+	resultVO.setResult(resultMap);
+	resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
+	resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
+
+	return resultVO;
+}
+
+
+@PostMapping(value = "/srchEtc")
+		public ResultVO srchEtc (HttpServletRequest request) throws Exception {
+	
+			ResultVO resultVO = new ResultVO();
+			
+			System.out.println("srchEtc ===== POST");
+	
+			// String 사번 = "";
+			List<IntroWorkVO> srchData = new ArrayList<IntroWorkVO>();
+
+			srchData = itWorkService.srchEtc("70020");
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("result", srchData);
+ 
+		resultVO.setResult(resultMap);
+		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
+		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
+
+		return resultVO;
+	}
+
 
 }

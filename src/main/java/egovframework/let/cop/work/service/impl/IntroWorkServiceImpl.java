@@ -34,4 +34,12 @@ public class IntroWorkServiceImpl extends EgovAbstractServiceImpl implements Int
     public List<IntroWorkVO> srchWork(String paramData) throws Exception {
         return introWorkDAO.srchWork(paramData);
      }
+
+     public int insEtc(IntroWorkVO paramData) throws Exception {
+      return introWorkDAO.insEtc(paramData);
+   }
+
+   public List<IntroWorkVO> srchEtc(String paramData) throws Exception {
+      return introWorkDAO.srchEtc(paramData);
+   }
 }
