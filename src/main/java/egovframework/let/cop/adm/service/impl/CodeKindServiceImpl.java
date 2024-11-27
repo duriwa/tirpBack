@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import egovframework.let.cop.adm.service.CodeKindService;
 import egovframework.let.cop.adm.service.CodeKindVO;
-import egovframework.let.cop.adm.service.MenuVO;
 import egovframework.let.cop.com.service.EgovUserInfManageService;
 
 

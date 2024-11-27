@@ -26,7 +26,7 @@ import lombok.Setter;
 @Schema(description = "공통코드 속성 정보 VO")
 @Getter
 @Setter
-public class CodeKindVO extends Menu implements Serializable {
+public class CodeKindVO extends CodeKind implements Serializable {
 
 	/**
 	 *  serialVersion UID
