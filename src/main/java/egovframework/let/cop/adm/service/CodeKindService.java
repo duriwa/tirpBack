@@ -41,7 +41,17 @@ public interface CodeKindService {
 	  throws Exception;
 
 	/**
-	 * 사용자 속성 정보의 목록을 조회 한다.
+
+	 * 사용자 속성정보 한 건을 상세조회한다.
+	 * @param CodeKindVO
+	 * 
+	 * @exception Exception Exception
+	 */
+	public CodeKindVO selectCodeKindInf(CodeKindVO codeKindvo)
+	  throws Exception;
+
+	/**
+
 	 * @param CodeKindVO
 	 * 
 	 * @exception Exception Exception

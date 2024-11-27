@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="IntroWorkDAO">
+
+	<insert id="insWork" parameterType="egovframework.let.cop.work.service.IntroWorkVO">
+			INSERT INTO tb_wk_report
+
+			(SEQ, SAWON_CD, PART, GUBUN, SR_NO, SR_NM, DEV_ST_DT, DEV_END_DT, END_DT, PROG_RATE, PROG_STATUS,
+			 MEM_HOUR, BIGO, LEVEL, HJSYYB, Z_CREATE_BY, Z_CREATE_DATE, Z_UPDATE_BY, Z_UPDATE_DATE
+			 )
+			VALUES 
+			( '3', '70020', '3', #{gubun}, #{srNo}, '한길형', #{devStDt}, #{devEndDt}, #{endDt}, '10', #{progStatus},
+			 #{memHour}, #{bigo}, #{level}, '1', 'admin', CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP
+			 )			
+		
+	</insert>
+	
+
+	<select id="srchWork" parameterType="String" resultType="HashMap">
+		SELECT *
+		FROM tb_wk_report
+		WHERE 1=1 AND
+		<if test="sawonCd != null and sawonCd != ''"> 
+			SAWON_CD = #{sawonCd}
+		</if>
+	</select>
+
+
+
+	<insert id="insEtc" parameterType="egovframework.let.cop.work.service.IntroWorkVO">
+		INSERT INTO tb_wk_etc
+
+		(	seq, sawon_cd, woldo, gubun, gubun_detail, st_dt, end_dt, edu_nm, bigo,
+			hjsyyb, z_create_by, z_create_date, z_update_by, z_update_date
+		)
+		VALUES 
+		(	'1', '70020', '?', #{gubun}, #{gubunDetail}, #{stDt}, #{endDt}, #{eduNm}, #{bigo},
+			'1', 'admin', CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP
+		)
+	</insert>
+
+	<select id="srchEtc" parameterType="String" resultType="HashMap">
+		SELECT *
+		FROM tb_wk_etc
+		WHERE 1=1 AND
+		<if test="sawonCd != null and sawonCd != ''"> 
+			SAWON_CD = #{sawonCd}
+		</if>
+	</select>
+
+</mapper>

@@ -114,3 +114,8 @@ INSERT INTO tb_cm_user(
 INSERT INTO tb_cm_user(
 	user_id, user_nm, user_pw, use_at, frst_reg_dt, frst_reg_id, last_proc_dt, last_proc_id)
 	VALUES ('khkim', '김경호', 'khkim','Y',CURRENT_TIMESTAMP,'init',CURRENT_TIMESTAMP,'init');
+
+--메뉴등록
+INSERT INTO public.tb_cm_menu(
+	menu_id, menu_nm, menu_level, menu_order, use_yn)
+	VALUES ('00000001', 'menu1', 1, 1, 'Y');
