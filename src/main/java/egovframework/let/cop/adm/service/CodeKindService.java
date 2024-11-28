@@ -59,5 +59,15 @@ public interface CodeKindService {
 	public Map<String, Object> selectCodeKindInfs(CodeKindVO codeKindvo)
 	  throws Exception;
 
+	/**
+	 * 코드 속성정보를 수정한다.
+	 * @param CodeKindVO
+	 * 
+	 * @param userMngVO
+	 * @exception Exception Exception
+	 */
+	public void updateCodeKindInf(CodeKindVO codeKindvo)
+	  throws Exception;	  
+
 
 }
