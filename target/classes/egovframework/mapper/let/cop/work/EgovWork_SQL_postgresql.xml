@@ -45,7 +45,7 @@
 		FROM tb_wk_etc
 		WHERE 1=1 AND
 		<if test="sawonCd != null and sawonCd != ''"> 
-			SAWON_CD = #{sawonCd}
+			SAWON_CD = #{sawonCd}  
 		</if>
 	</select>
 

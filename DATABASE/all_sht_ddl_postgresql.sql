@@ -524,4 +524,47 @@ COMMENT ON COLUMN public.tb_sr_list.HJSYYB    IS '현재사용여부';
 COMMENT ON COLUMN public.tb_sr_list.Z_CREATE_BY    IS '생성자';
 COMMENT ON COLUMN public.tb_sr_list.Z_CREATE_DATE    IS '생성일자';
 COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_BY    IS '수정자';
-COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_DATE     IS '수정일자';
+COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_DATE     IS '수정일자';  
+
+
+-- 주간보고
+
+CREATE TABLE tb_wk_report (
+  seq NUMERIC(6,0) NOT NULL,
+  sawon_cd varchar(6) not null,
+  part varchar(3),
+  gubun varchar(1),
+  sr_no varchar(11),
+  sr_nm varchar(150),
+  dev_st_dt timestamp default current_timestamp,
+  dev_end_dt timestamp default current_timestamp,
+  end_dt timestamp default current_timestamp,
+  prog_rate numeric(3, 0),
+  bigo varchar(150),
+  level varchar(1),
+  hjsyyb varchar(1),
+  z_create_by varchar(20),
+  z_create_Date timestamp default current_timestamp,
+  z_update_by varchar(20),
+  z_update_date timestamp default current_timestamp,
+  CONSTRAINT tb_wk_report_pk PRIMARY KEY (seq, sawon_cd)
+);
+
+CREATE TABLE tb_wk_etc (
+  seq NUMERIC(6,0) NOT NULL,
+  sawon_cd varchar(6) not null,
+  woldo varchar(6),
+  gubun varchar(1),
+  gubun_detail varchar(1),
+  st_dt timestamp default current_timestamp,
+  end_dt timestamp default current_timestamp,
+  edu_nm varchar(100),
+  bigo varchar(150),
+  hjsyyb varchar(1),
+  z_create_by varchar(20),
+  z_create_Date timestamp default current_timestamp,
+  z_update_by varchar(20),
+  z_update_date timestamp default current_timestamp,
+  CONSTRAINT tb_wk_etc_pk PRIMARY KEY (seq, sawon_cd)
+
+);
