@@ -24,6 +24,29 @@
 		<if test="sawonCd != null and sawonCd != ''"> 
 			SAWON_CD = #{sawonCd}
 		</if>
-</select>
+	</select>
+
+
+
+	<insert id="insEtc" parameterType="egovframework.let.cop.work.service.IntroWorkVO">
+		INSERT INTO tb_wk_etc
+
+		(	seq, sawon_cd, woldo, gubun, gubun_detail, st_dt, end_dt, edu_nm, bigo,
+			hjsyyb, z_create_by, z_create_date, z_update_by, z_update_date
+		)
+		VALUES 
+		(	'1', '70020', '?', #{gubun}, #{gubunDetail}, #{stDt}, #{endDt}, #{eduNm}, #{bigo},
+			'1', 'admin', CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP
+		)
+	</insert>
+
+	<select id="srchEtc" parameterType="String" resultType="HashMap">
+		SELECT *
+		FROM tb_wk_etc
+		WHERE 1=1 AND
+		<if test="sawonCd != null and sawonCd != ''"> 
+			SAWON_CD = #{sawonCd}
+		</if>
+	</select>
 
 </mapper>

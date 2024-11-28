@@ -524,4 +524,4 @@ COMMENT ON COLUMN public.tb_sr_list.HJSYYB    IS '현재사용여부';
 COMMENT ON COLUMN public.tb_sr_list.Z_CREATE_BY    IS '생성자';
 COMMENT ON COLUMN public.tb_sr_list.Z_CREATE_DATE    IS '생성일자';
 COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_BY    IS '수정자';
-COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_DATE     IS '수정일자';
+COMMENT ON COLUMN public.tb_sr_list.Z_UPDATE_DATE     IS '수정일자';  
