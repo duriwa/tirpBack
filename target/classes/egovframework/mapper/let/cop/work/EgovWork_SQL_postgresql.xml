@@ -10,7 +10,12 @@
 			 MEM_HOUR, BIGO, LEVEL, HJSYYB, Z_CREATE_BY, Z_CREATE_DATE, Z_UPDATE_BY, Z_UPDATE_DATE
 			 )
 			VALUES 
-			( '3', '70020', '3', #{gubun}, #{srNo}, '한길형', #{devStDt}, #{devEndDt}, #{endDt}, '10', #{progStatus},
+			( (SELECT COALESCE(MAX(seq), 0) + 1 FROM tb_wk_report), #{sawonCd}, '3', #{gubun}, #{srNo}, #{srNm}, 
+			
+			
+			to_date(#{devStDt}, 'YYYY-MM-DD'),
+			to_date(#{devEndDt}, 'YYYY-MM-DD'),
+			to_date(#{endDt}, 'YYYY-MM-DD'), #{progRate}, #{progStatus},
 			 #{memHour}, #{bigo}, #{level}, '1', 'admin', CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP
 			 )			
 		
@@ -66,7 +71,9 @@
 			hjsyyb, z_create_by, z_create_date, z_update_by, z_update_date
 		)
 		VALUES 
-		(	'1', '70020', '?', #{gubun}, #{gubunDetail}, #{stDt}, #{endDt}, #{eduNm}, #{bigo},
+		(	(SELECT COALESCE(MAX(seq), 0) + 1 FROM tb_wk_etc), #{sawonCd}, '?', #{gubun}, #{gubunDetail},
+			to_date(#{stDt}, 'YYYY-MM-DD'),
+			to_date(#{endDt}, 'YYYY-MM-DD'),#{eduNm}, #{bigo},
 			'1', 'admin', CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP
 		)
 	</insert>
