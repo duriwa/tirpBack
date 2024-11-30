@@ -82,7 +82,7 @@ public class IntroWorkController {
 
 
 	@PostMapping(value = "/srchWork")
-		public ResultVO srchWork (HttpServletRequest request) throws Exception {
+		public ResultVO srchWork (HttpServletRequest request, @RequestBody IntroWorkVO paramData) throws Exception {
 	
 			ResultVO resultVO = new ResultVO();
 			
@@ -90,8 +90,22 @@ public class IntroWorkController {
 	
 			// String 사번 = "";
 			List<IntroWorkVO> srchData = new ArrayList<IntroWorkVO>();
+			HashMap<String, String> resultMap1 = new HashMap<>();
 
-			srchData = itWorkService.srchWork("70020");
+			resultMap1.put("sawonCd", paramData.getSawonCd());
+
+			if ("0".equals(paramData.getSrchGubun())) {
+				resultMap1.put("srNo", paramData.getSrchWrd());
+			} else {
+				resultMap1.put("srNm", paramData.getSrchWrd());
+			}
+
+			
+
+
+System.out.println(resultMap1.toString());
+
+			srchData = itWorkService.srchWork(resultMap1);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
@@ -128,16 +142,22 @@ public class IntroWorkController {
 
 
 @PostMapping(value = "/srchEtc")
-		public ResultVO srchEtc (HttpServletRequest request) throws Exception {
+		public ResultVO srchEtc (HttpServletRequest request, @RequestBody IntroWorkVO paramData) throws Exception {
 	
 			ResultVO resultVO = new ResultVO();
 			
 			System.out.println("srchEtc ===== POST");
-	
+			
 			// String 사번 = "";
 			List<IntroWorkVO> srchData = new ArrayList<IntroWorkVO>();
 
-			srchData = itWorkService.srchEtc("70020");
+			HashMap<String, String> resultMap1 = new HashMap<>();
+			resultMap1.put("sawonCd", paramData.getSawonCd());
+			resultMap1.put("eduNm", paramData.getEduNm());
+
+			System.out.println(resultMap1.toString());
+
+			srchData = itWorkService.srchEtc(resultMap1);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 

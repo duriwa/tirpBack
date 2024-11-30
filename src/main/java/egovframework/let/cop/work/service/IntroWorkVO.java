@@ -35,8 +35,8 @@ public class IntroWorkVO implements Serializable {
 	private String gubun;
 	private String srNo;
 	private String srNm;
-	private Date devStDt;
-	private Date devEndDt;
+	private String devStDt;
+	private String devEndDt;
 	private int progRate;
 	private String progStatus;
 	private int memHour;
@@ -49,9 +49,28 @@ public class IntroWorkVO implements Serializable {
 
 	private String woldo;
 	private String gubunDetail;
-	private Date stDt;
-	private Date endDt;
+	private String stDt;
+	private String endDt;
 	private String eduNm;
+
+	private String srchGubun;
+	private String srchWrd;
+
+	public String getSrchWrd() {
+		return this.srchWrd;
+	}
+
+	public void setSrchWrd(String srchWrd) {
+		this.srchWrd = srchWrd;
+	}
+
+	public String getSrchGubun() {
+		return this.srchGubun;
+	}
+
+	public void setSrchGubun(String srchGubun) {
+		this.srchGubun = srchGubun;
+	}
 
 	public int getSeq() {
 		return this.seq;
@@ -107,19 +126,19 @@ public class IntroWorkVO implements Serializable {
 		this.srNm = srNm;
 	}
 
-	public Date getDevStDt() {
+	public String getDevStDt() {
 		return this.devStDt;
 	}
 
-	public void setDevStDt(Date devStDt) {
+	public void setDevStDt(String devStDt) {
 		this.devStDt = devStDt;
 	}
 
-	public Date getDevEndDt() {
+	public String getDevEndDt() {
 		return this.devEndDt;
 	}
 
-	public void setDevEndDt(Date devEndDt) {
+	public void setDevEndDt(String devEndDt) {
 		this.devEndDt = devEndDt;
 	}
 
@@ -179,19 +198,19 @@ public class IntroWorkVO implements Serializable {
 		this.gubunDetail = gubunDetail;
 	}
 
-	public Date getStDt() {
+	public String getStDt() {
 		return this.stDt;
 	}
 
-	public void setStDt(Date stDt) {
+	public void setStDt(String stDt) {
 		this.stDt = stDt;
 	}
 
-	public Date getEndDt() {
+	public String getEndDt() {
 		return this.endDt;
 	}
 
-	public void setEndDt(Date endDt) {
+	public void setEndDt(String endDt) {
 		this.endDt = endDt;
 	}
 

@@ -1,5 +1,6 @@
 package egovframework.let.cop.work.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.egovframe.rte.psl.dataaccess.EgovAbstractMapper;
@@ -33,7 +34,8 @@ public class IntroWorkDAO extends EgovAbstractMapper {
 
 
     @SuppressWarnings({ "deprecation", "unchecked" })
-    public List<IntroWorkVO> srchWork(String paramData) throws Exception {
+    public List<IntroWorkVO> srchWork(HashMap<String, String> paramData) throws Exception {
+        System.out.println(paramData.toString());
         return (List<IntroWorkVO>)list("IntroWorkDAO.srchWork", paramData);
     }    
 
@@ -42,7 +44,10 @@ public class IntroWorkDAO extends EgovAbstractMapper {
     }    
 
     @SuppressWarnings({ "deprecation", "unchecked" })
-    public List<IntroWorkVO> srchEtc(String paramData) throws Exception {
+    public List<IntroWorkVO> srchEtc(HashMap<String, String> paramData) throws Exception {
+        System.out.println("dao~~~~~");
+        System.out.println(paramData.get("eduNm"));
+        System.out.println(paramData.get("sawonCd"));
         return (List<IntroWorkVO>)list("IntroWorkDAO.srchEtc", paramData);
     }   
 }

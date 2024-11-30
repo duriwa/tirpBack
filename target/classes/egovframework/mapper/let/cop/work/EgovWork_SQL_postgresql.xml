@@ -16,14 +16,45 @@
 		
 	</insert>
 	
-
-	<select id="srchWork" parameterType="String" resultType="HashMap">
-		SELECT *
+	<select id="srchWork" parameterType="HashMap" resultType="HashMap">
+		SELECT 
+		case
+			when gubun = '1' then '회의'
+			when gubun = '2' then '세미나'
+			when gubun = '3' then '강의'
+			when gubun = '4' then '교육'
+			else '기타'
+		end as gubun,
+		case
+			when level = 'A' then '높음'
+			when level = 'B' then '보통'
+			else '낮음'
+		end as level,
+		sr_nm,
+		sr_no,
+		to_Char(dev_st_dt, 'YYYY-MM-DD') as dev_st_dt,
+		to_Char(dev_end_dt, 'YYYY-MM-DD') as dev_end_dt,
+		to_Char(end_dt, 'YYYY-MM-DD') as end_dt,
+		case
+			when prog_status = 'I' then '진행중'
+			when prog_status = 'S' then '중지'
+			when prog_status = 'W' then '대기'
+			when prog_status = 'E' then '완료'
+		end as prog_status,
+		prog_rate,
+		mem_hour as memHour,
+		bigo
 		FROM tb_wk_report
-		WHERE 1=1 AND
-		<if test="sawonCd != null and sawonCd != ''"> 
-			SAWON_CD = #{sawonCd}
+		WHERE 1=1
+		<if test="sawonCd != null and sawonCd != '' and sawonCd != 'admin'"> 
+			AND SAWON_CD = #{sawonCd}  
 		</if>
+		<if test="srNo != null"> 
+			AND SR_NO = #{srNo}  
+		</if>
+		<if test="srNm != null"> 
+			AND SR_NM = #{srNm}  
+		</if>		
 	</select>
 
 
@@ -40,12 +71,29 @@
 		)
 	</insert>
 
-	<select id="srchEtc" parameterType="String" resultType="HashMap">
-		SELECT *
+	<select id="srchEtc" parameterType="HashMap" resultType="HashMap">
+		SELECT 
+		case
+			when gubun = '1' then '휴가'
+			else '교육'
+		end as gubun,
+		case
+			when gubun_detail = 'A' then '반차'
+			when gubun_detail = 'B' then '연차'
+			when gubun_detail = 'C' then '교육'
+			else '웹교육'
+		end as gubunDetail,
+		edu_nm as eduNm,
+		to_Char(st_dt, 'YYYY-MM-DD') as stDt,
+		to_Char(end_dt, 'YYYY-MM-DD') as endDt,
+		bigo
 		FROM tb_wk_etc
-		WHERE 1=1 AND
-		<if test="sawonCd != null and sawonCd != ''"> 
-			SAWON_CD = #{sawonCd}  
+		WHERE 1=1 
+		<if test="sawonCd != null and sawonCd != '' and sawonCd != 'admin'"> 
+			AND SAWON_CD = #{sawonCd}  
+		</if>
+		<if test="eduNm != null"> 
+			AND EDU_NM LIKE CONCAT('%', #{eduNm}, '%')
 		</if>
 	</select>
 

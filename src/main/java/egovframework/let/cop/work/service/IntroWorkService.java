@@ -1,5 +1,6 @@
 package egovframework.let.cop.work.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,13 +26,13 @@ public interface IntroWorkService {
 	  throws Exception;
 
 
-	public List<IntroWorkVO> srchWork(String paramData)
+	public List<IntroWorkVO> srchWork(HashMap<String, String> paramData)
 	throws Exception;
 
 	public int insEtc(IntroWorkVO paramData)
 	throws Exception;
 
-	public List<IntroWorkVO> srchEtc(String paramData)
+	public List<IntroWorkVO> srchEtc(HashMap<String, String> paramData)
 	throws Exception;
 
 }
